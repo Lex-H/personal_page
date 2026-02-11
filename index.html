@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --genshin-gold: #c6a05d; /* 深色金，適合白色背景 */
-            --genshin-dark: #3b4250; /* 原神標準深藍灰 */
-            --genshin-light-bg: #f3f4f6; /* 淺灰色背景 */
+            --genshin-gold: #c6a05d; 
+            --genshin-dark: #3b4250; 
+            --genshin-light-bg: #f3f4f6; 
             --genshin-card-bg: rgba(255, 255, 255, 0.8);
             --genshin-accent: #4a5363;
         }
@@ -20,11 +20,10 @@
             background-color: var(--genshin-light-bg);
             color: var(--genshin-dark);
             overflow-x: hidden;
-            /* 模擬原神載入畫面的漸層感 */
             background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);
         }
 
-        /* 遊戲背景紋理 (深色線條以適應淺色背景) */
+        /* 遊戲背景紋理 */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -37,7 +36,7 @@
             z-index: -1;
         }
 
-        /* 原神風格卡片 - 淺色模式優化 */
+        /* 原神風格卡片 */
         .genshin-card {
             background: var(--genshin-card-bg);
             border: 1px solid rgba(74, 83, 99, 0.2);
@@ -85,7 +84,7 @@
         .genshin-title::before { left: 10px; }
         .genshin-title::after { right: 10px; }
 
-        /* 側邊導航 - 改為深藍灰色系 */
+        /* 側邊導航 */
         .side-nav-item {
             width: 56px;
             height: 56px;
@@ -165,7 +164,6 @@
             100% { transform: scale(1.4); opacity: 0; }
         }
 
-        /* 稀有度星星 */
         .star {
             color: #d3a32d;
             text-shadow: 0 0 2px rgba(211, 163, 45, 0.3);
@@ -209,11 +207,45 @@
             display: none;
         }
 
-        /* 針對白色背景調整的標籤 */
         .tag {
             background: #f1f5f9;
             color: var(--genshin-dark);
             border: 1px solid rgba(74, 83, 99, 0.1);
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+
+        /* 提示框動畫 */
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            10% { opacity: 1; transform: translate(-50%, 0); }
+            90% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(59, 66, 80, 0.95);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--genshin-gold);
+            font-size: 14px;
+            pointer-events: none;
+            animation: fadeInOut 3s forwards;
         }
     </style>
 </head>
@@ -236,12 +268,11 @@
     <!-- 浮動聯繫按鈕 -->
     <button class="genshin-fab group" onclick="openContact()" title="連繫我">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="absolute right-20 bg-white text-slate-800 px-3 py-1 rounded border border-slate-200 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-bold">連繫我</span>
+        <span class="absolute right-20 bg-white text-slate-800 px-3 py-1 rounded border border-slate-200 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-bold">發送郵件</span>
     </button>
 
     <!-- 主要內容區 -->
     <main class="container mx-auto px-6 py-20 md:pl-32">
-        
         <!-- 首頁 / 角色資訊 -->
         <section id="home" class="content-section">
             <div class="flex flex-col md:flex-row items-center gap-12">
@@ -259,11 +290,7 @@
                     <h2 class="text-gray-500 text-sm tracking-widest font-bold mb-2 uppercase">Character Level 90 | Constellation 6</h2>
                     <h1 class="text-5xl font-bold mb-4 text-slate-800">Alex · 前端工程師</h1>
                     <div class="flex justify-center md:justify-start gap-1 mb-6">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
                     </div>
                     <p class="text-lg text-slate-600 max-w-xl leading-relaxed mb-8">
                         你好！我是 Alex，一個熱愛寫程式的前端開發者。我喜歡把複雜的後端邏輯變成漂亮、好用的網頁介面，目標是讓每個點進網站的人都能有最順暢的操作體驗。
@@ -276,109 +303,56 @@
             </div>
         </section>
 
-        <!-- 作品集 / 祈願紀錄 -->
+        <!-- 作品集 -->
         <section id="portfolio" class="content-section hidden-section">
             <h2 class="genshin-title text-3xl font-bold mb-12 text-center w-full uppercase tracking-tighter">作品展示</h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 作品 1 -->
+                <!-- 作品卡片 -->
                 <div class="genshin-card p-4">
                     <div class="h-48 bg-slate-200 mb-4 rounded flex items-center justify-center relative group">
                         <span class="text-slate-400">專案預覽圖 (16:9)</span>
-                        <div class="absolute inset-0 bg-slate-800/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <span class="bg-white/90 text-slate-800 px-4 py-2 rounded-full font-bold shadow-lg">查看詳情</span>
-                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-slate-800">提瓦特電子商務平台</h3>
-                    <p class="text-sm text-slate-500 mb-4">使用 React 與 Redux 開發的完整購物商城，包含購物車與動態濾鏡功能。</p>
+                    <p class="text-sm text-slate-500 mb-4">使用 React 開發的購物商城。</p>
                     <div class="flex gap-2">
                         <span class="tag px-2 py-1 text-xs rounded">React</span>
-                        <span class="tag px-2 py-1 text-xs rounded">Node.js</span>
-                    </div>
-                </div>
-
-                <!-- 作品 2 -->
-                <div class="genshin-card p-4">
-                    <div class="h-48 bg-slate-200 mb-4 rounded flex items-center justify-center relative group">
-                        <span class="text-slate-400">專案預覽圖 (16:9)</span>
-                        <div class="absolute inset-0 bg-slate-800/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <span class="bg-white/90 text-slate-800 px-4 py-2 rounded-full font-bold shadow-lg">查看詳情</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">冒險者地圖系統</h3>
-                    <p class="text-sm text-slate-500 mb-4">基於 Leaflet.js 的互動式地圖，支援自定義標記與路徑規劃。</p>
-                    <div class="flex gap-2">
-                        <span class="tag px-2 py-1 text-xs rounded">JavaScript</span>
-                        <span class="tag px-2 py-1 text-xs rounded">Leaflet</span>
-                    </div>
-                </div>
-
-                <!-- 作品 3 -->
-                <div class="genshin-card p-4">
-                    <div class="h-48 bg-slate-200 mb-4 rounded flex items-center justify-center relative group">
-                        <span class="text-slate-400">專案預覽圖 (16:9)</span>
-                        <div class="absolute inset-0 bg-slate-800/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <span class="bg-white/90 text-slate-800 px-4 py-2 rounded-full font-bold shadow-lg">查看詳情</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">深境螺旋數據分析</h3>
-                    <p class="text-sm text-slate-500 mb-4">使用 D3.js 製作的數據視覺化儀表板，分析複雜的戰鬥數據。</p>
-                    <div class="flex gap-2">
-                        <span class="tag px-2 py-1 text-xs rounded">TypeScript</span>
-                        <span class="tag px-2 py-1 text-xs rounded">D3.js</span>
+                        <span class="tag px-2 py-1 text-xs rounded">Tailwind</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 技能 / 天賦天賦 -->
+        <!-- 技能 / 天賦 -->
         <section id="skills" class="content-section hidden-section">
             <h2 class="genshin-title text-3xl font-bold mb-12 text-center w-full uppercase">接案類型</h2>
-            
             <div class="max-w-3xl mx-auto space-y-8">
-                <!-- 技能 1 -->
                 <div class="genshin-card p-6 flex items-start gap-6">
-                    <div class="w-16 h-16 shrink-0 bg-slate-100 rounded-lg flex items-center justify-center border border-slate-200 shadow-inner">
-                        <svg class="text-slate-600" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-                    </div>
                     <div class="flex-1">
                         <div class="flex justify-between mb-2">
-                            <h3 class="font-bold text-lg text-slate-800">普通攻擊 · 前端建構</h3>
+                            <h3 class="font-bold text-lg text-slate-800">前端建構</h3>
                             <span class="text-slate-500 font-bold">Lv.10</span>
                         </div>
-                        <p class="text-slate-500 text-sm mb-4">精通語義化 HTML 與高效 CSS 佈局，能處理各種極端設備的兼容性挑戰。</p>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%"></div>
-                        </div>
+                        <p class="text-slate-500 text-sm mb-4">精通 HTML 與 CSS 佈局，處理各種兼容性挑戰。</p>
+                        <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
                     </div>
                 </div>
-
-                <!-- 技能 2 -->
                 <div class="genshin-card p-6 flex items-start gap-6">
-                    <div class="w-16 h-16 shrink-0 bg-slate-100 rounded-lg flex items-center justify-center border border-slate-200 shadow-inner">
-                        <svg class="text-slate-600" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m4.93 19.07 14.14-14.14"/></svg>
-                    </div>
                     <div class="flex-1">
                         <div class="flex justify-between mb-2">
-                            <h3 class="font-bold text-lg text-slate-800">元素爆發 · React 全域管理</h3>
+                            <h3 class="font-bold text-lg text-slate-800">React 全域管理</h3>
                             <span class="text-slate-500 font-bold">Lv.9</span>
                         </div>
-                        <p class="text-slate-500 text-sm mb-4">掌握 React 生態系，專注於高效能的狀態流與組件生命週期優化。</p>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="88%"></div>
-                        </div>
+                        <p class="text-slate-500 text-sm mb-4">掌握 React 生態系，專注於高效能狀態管理。</p>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88%"></div></div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- 底部資訊 -->
-    <footer class="mt-20 py-10 border-t border-gray-200 bg-white/50">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-slate-400 text-sm mb-2">© 2024 Traveler Frontend · 來自提瓦特的開發者</p>
-            <p class="text-slate-300 text-xs uppercase tracking-widest font-bold">May the wind guide your path</p>
-        </div>
+    <footer class="mt-20 py-10 border-t border-gray-200 bg-white/50 text-center">
+        <p class="text-slate-400 text-sm mb-2">© 2024 Traveler Frontend · 來自提瓦特的開發者</p>
+        <p class="text-slate-300 text-xs uppercase tracking-widest font-bold">May the wind guide your path</p>
     </footer>
 
     <script>
@@ -397,40 +371,54 @@
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.add('hidden-section');
             });
-            const target = document.getElementById(targetId);
-            target.classList.remove('hidden-section');
+            document.getElementById(targetId).classList.remove('hidden-section');
             
             document.querySelectorAll('.side-nav-item').forEach(item => {
-                if(item.dataset.target === targetId) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
+                item.classList.toggle('active', item.dataset.target === targetId);
             });
 
-            if(targetId === 'skills') {
-                animateSkillBars();
-            }
-
+            if(targetId === 'skills') animateSkillBars();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 聯繫我按鈕功能
+        /**
+         * 聯繫我功能（修復版）
+         * 1. 複製 Email 到剪貼簿 (防止 mailto 失效)
+         * 2. 嘗試開啟郵件軟體
+         */
         function openContact() {
-            // 這裡可以放置聯繫邏輯，暫時用 console 模擬
-            console.log("正在發送冒險邀請給 Alex...");
-            const btn = document.querySelector('.genshin-fab');
-            btn.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                btn.style.transform = '';
-            }, 100);
+            const email = "dream.huang.314@gmail.com";
+            const subject = "冒險委託：來自作品集的聯繫";
+            const body = "你好 Alex，我在你的作品集看到你的資訊，想進一步洽談...";
             
-            // 模擬一個訊息對話框
+            const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // 1. 執行複製到剪貼簿 (相容性寫法)
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email);
+            } else {
+                // 舊瀏覽器備用方案
+                const textArea = document.createElement("textarea");
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("Copy");
+                textArea.remove();
+            }
+
+            // 2. 顯示 UI 提示
             const msg = document.createElement('div');
-            msg.className = 'fixed top-10 left-1/2 -translate-x-1/2 bg-white border border-slate-200 px-6 py-3 rounded-full shadow-2xl z-[200] font-bold text-slate-800 flex items-center gap-3 animate-bounce';
-            msg.innerHTML = '<span style="color: #c6a05d">✦</span> 正在連接伺服器...';
+            msg.className = 'toast-msg';
+            msg.innerHTML = '<span style="color: #c6a05d; font-size:1.2em;">✦</span> <span>Email 已複製！正在喚醒郵件程式...</span>';
             document.body.appendChild(msg);
+            
+            // 移除提示
             setTimeout(() => msg.remove(), 3000);
+
+            // 3. 嘗試開啟郵件系統 (使用 location.href 較為穩定)
+            setTimeout(() => {
+                window.location.href = mailtoUrl;
+            }, 600);
         }
 
         // 導航點擊事件
@@ -450,7 +438,7 @@
         }
 
         window.onload = () => {
-            console.log("今日冒險計畫：優化程式碼並領取每日委託獎勵。");
+            console.log("系統就緒：Email 功能已修復。");
         };
     </script>
 </body>
