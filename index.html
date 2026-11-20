@@ -3,444 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex | 個人作品集</title>
+    <meta name="description" content="幫台中在地好店與品牌打造能帶客、留熟客的網站與會員系統。台中可面談，全台與海外線上合作。">
+    <meta property="og:title" content="Alex｜幫品牌與好店打造會帶客、留熟客的網站">
+    <meta property="og:description" content="從品牌形象、線上菜單到會員集點與管理後台，讓網路訪客成為長期熟客。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lex-h.github.io/personal_page/">
+    <meta property="og:image" content="https://lex-h.github.io/personal_page/my_photo.jpg">
+    <meta property="og:locale" content="zh_TW">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Alex｜Custom Websites & Member Systems">
+    <meta name="twitter:description" content="Websites and member tools that help local businesses attract customers and build loyalty.">
+    <meta name="twitter:image" content="https://lex-h.github.io/personal_page/my_photo.jpg">
+    <title data-i18n="pageTitle">Alex｜品牌網站與會員系統</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --genshin-gold: #c6a05d; 
-            --genshin-dark: #3b4250; 
-            --genshin-light-bg: #f3f4f6; 
-            --genshin-card-bg: rgba(255, 255, 255, 0.8);
-            --genshin-accent: #4a5363;
-        }
-
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--genshin-light-bg);
-            color: var(--genshin-dark);
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);
-        }
-
-        /* 遊戲背景紋理 */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.08;
-            pointer-events: none;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAgMEw2MCAzMEwzMCA2MEwwIDMwTDMwIDBaIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+');
-            z-index: -1;
-        }
-
-        /* 原神風格卡片 */
-        .genshin-card {
-            background: var(--genshin-card-bg);
-            border: 1px solid rgba(74, 83, 99, 0.2);
-            border-radius: 4px;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            overflow: hidden;
-            backdrop-filter: blur(8px);
-        }
-
-        .genshin-card:hover {
-            border-color: var(--genshin-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(198, 160, 93, 0.15);
-        }
-
-        .genshin-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--genshin-gold), transparent);
-        }
-
-        /* 標題裝飾 */
-        .genshin-title {
-            position: relative;
-            display: inline-block;
-            padding: 0 45px;
-            color: var(--genshin-dark);
-        }
-
-        .genshin-title::before, .genshin-title::after {
-            content: '✦';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--genshin-gold);
-            font-size: 1.4rem;
-        }
-
-        .genshin-title::before { left: 10px; }
-        .genshin-title::after { right: 10px; }
-
-        /* 側邊導航 */
-        .side-nav-item {
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(74, 83, 99, 0.05);
-            border: 1px solid rgba(74, 83, 99, 0.15);
-            border-radius: 50%;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--genshin-dark);
-        }
-
-        .side-nav-item:hover, .side-nav-item.active {
-            background: var(--genshin-dark);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(59, 66, 80, 0.3);
-        }
-
-        /* 按鈕風格 */
-        .genshin-btn {
-            background: var(--genshin-dark);
-            color: #fff;
-            padding: 10px 28px;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: 0.2s;
-            border: 2px solid var(--genshin-dark);
-        }
-
-        .genshin-btn:hover {
-            background: transparent;
-            color: var(--genshin-dark);
-        }
-
-        /* 浮動聯繫按鈕 */
-        .genshin-fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 64px;
-            height: 64px;
-            background: var(--genshin-dark);
-            border: 2px solid var(--genshin-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--genshin-gold);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(198, 160, 93, 0.3);
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .genshin-fab:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 30px rgba(198, 160, 93, 0.5);
-            color: #fff;
-        }
-
-        .genshin-fab::after {
-            content: '';
-            position: absolute;
-            width: 110%;
-            height: 110%;
-            border: 1px solid var(--genshin-gold);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: pulse-ring 2s infinite;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.4); opacity: 0; }
-        }
-
-        .star {
-            color: #d3a32d;
-            text-shadow: 0 0 2px rgba(211, 163, 45, 0.3);
-        }
-
-        /* 進度條 */
-        .skill-bar {
-            height: 10px;
-            background: #e2e8f0;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #c6a05d, #e9d5a3);
-            border-radius: 5px;
-            width: 0%;
-            transition: width 1s ease-out;
-        }
-
-        /* 點擊特效 */
-        .click-effect {
-            position: fixed;
-            pointer-events: none;
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--genshin-gold);
-            transform: rotate(45deg);
-            animation: click-anim 0.5s ease-out forwards;
-            z-index: 9999;
-        }
-
-        @keyframes click-anim {
-            0% { transform: rotate(45deg) scale(0.5); opacity: 1; }
-            100% { transform: rotate(45deg) scale(2.5); opacity: 0; }
-        }
-
-        .hidden-section {
-            display: none;
-        }
-
-        .tag {
-            background: #f1f5f9;
-            color: var(--genshin-dark);
-            border: 1px solid rgba(74, 83, 99, 0.1);
-        }
-
-        @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-            animation: spin-slow 12s linear infinite;
-        }
-
-        /* 提示框動畫 */
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translate(-50%, 20px); }
-            10% { opacity: 1; transform: translate(-50%, 0); }
-            90% { opacity: 1; transform: translate(-50%, 0); }
-            100% { opacity: 0; transform: translate(-50%, -20px); }
-        }
-        .toast-msg {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(59, 66, 80, 0.95);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid var(--genshin-gold);
-            font-size: 14px;
-            pointer-events: none;
-            animation: fadeInOut 3s forwards;
-        }
+        :root { --gold:#c6a05d; --ink:#3b4250; --paper:#f5f6f7; }
+        html { scroll-behavior:smooth; scroll-padding-top:88px; }
+        body { font-family:'Noto Sans TC',sans-serif; color:var(--ink); background:radial-gradient(circle at 50% 0,#fff 0,#f1f2f4 75%); }
+        .card { background:rgba(255,255,255,.88); border:1px solid rgba(74,83,99,.15); border-radius:14px; box-shadow:0 8px 28px rgba(30,41,59,.06); }
+        .card-accent { border-top:3px solid var(--gold); }
+        .gold { color:#8a6a2f; }
+        .button { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:10px 22px; border:1px solid var(--ink); border-radius:999px; background:var(--ink); color:white; font-weight:700; transition:.2s; }
+        .button:hover { background:transparent; color:var(--ink); }
+        .button-outline { background:transparent; color:var(--ink); }
+        .lang-button { border:1px solid rgba(59,66,80,.2); border-radius:999px; padding:8px 12px; font-size:14px; font-weight:700; }
+        .lang-button[aria-pressed="true"] { color:#fff; background:var(--ink); }
+        .section-title { letter-spacing:.04em; }
+        .line-button { background:#06c755; border-color:#06c755; }
+        .line-button:hover { background:#05ad49; border-color:#05ad49; color:#fff; }
+        .line-button:disabled { cursor:not-allowed; opacity:.7; }
+        :focus-visible { outline:3px solid #c6a05d; outline-offset:3px; }
+        @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition-duration:.01ms !important; animation-duration:.01ms !important; } }
     </style>
 </head>
 <body class="min-h-screen">
-    <div class="bg-pattern"></div>
-
-    <!-- 側邊導航選單 -->
-    <nav class="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden md:block">
-        <div class="side-nav-item active" data-target="home" title="首頁">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+        <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+            <a href="#home" class="font-bold tracking-wide text-slate-800">Alex <span class="gold">／</span> <span data-i18n="brand">品牌網站與會員系統</span></a>
+            <nav class="hidden items-center gap-5 text-sm font-medium md:flex" aria-label="主要導覽">
+                <a href="#audience" data-i18n="navAudience" class="hover:text-amber-800">服務對象</a>
+                <a href="#services" data-i18n="navServices" class="hover:text-amber-800">服務方案</a>
+                <a href="#process" data-i18n="navProcess" class="hover:text-amber-800">合作方式</a>
+                <a href="#portfolio" data-i18n="navPortfolio" class="hover:text-amber-800">作品</a>
+                <a href="#contact" data-i18n="navContact" class="hover:text-amber-800">聯絡</a>
+            </nav>
+            <div class="flex shrink-0 gap-1" aria-label="Language selector">
+                <button class="lang-button" type="button" data-language="zh" aria-pressed="true">中</button>
+                <button class="lang-button" type="button" data-language="en" aria-pressed="false">EN</button>
+            </div>
         </div>
-        <div class="side-nav-item" data-target="portfolio" title="作品集">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-        </div>
-        <div class="side-nav-item" data-target="skills" title="接案類型">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10"/><path d="m16 8-4 4-4-4"/><path d="m15 22-3-3-3 3"/><path d="M12 10v9"/></svg>
-        </div>
-    </nav>
+        <nav class="flex gap-5 overflow-x-auto px-4 pb-3 text-sm font-medium md:hidden" aria-label="頁面導覽">
+            <a href="#audience" data-i18n="navAudience" class="whitespace-nowrap">服務對象</a><a href="#services" data-i18n="navServices" class="whitespace-nowrap">服務方案</a><a href="#process" data-i18n="navProcess" class="whitespace-nowrap">合作方式</a><a href="#portfolio" data-i18n="navPortfolio" class="whitespace-nowrap">作品</a><a href="#contact" data-i18n="navContact" class="whitespace-nowrap">聯絡</a>
+        </nav>
+    </header>
 
-    <!-- 浮動聯繫按鈕 -->
-    <button class="genshin-fab group" onclick="openContact()" title="連繫我">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="absolute right-20 bg-white text-slate-800 px-3 py-1 rounded border border-slate-200 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-bold">發送郵件</span>
-    </button>
-
-    <!-- 主要內容區 -->
-    <main class="container mx-auto px-6 py-20 md:pl-32">
-        <!-- 首頁 / 角色資訊 -->
-        <section id="home" class="content-section">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="w-64 h-64 md:w-80 md:h-80 relative">
-                    <!-- 頭像裝飾框 -->
-                    <div class="absolute inset-0 border-4 border-dashed border-gray-300 rounded-full animate-spin-slow"></div>
-                    <div class="absolute inset-2 bg-gray-200 rounded-full overflow-hidden border-2 border-amber-500/30">
-                        <div class="w-full h-full flex items-center justify-center bg-gray-100">
-                            <!-- [將下方 src 替換成你的圖片 URL 即可] -->
-                            <img src="my_photo.jpg" alt="Alex Avatar" class="w-full h-full object-cover" onerror="this.innerHTML='<svg class=\'w-1/2 h-1/2 text-gray-400\' viewBox=\'0 0 24 24\' fill=\'currentColor\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>'; this.type='svg';">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex-1 text-center md:text-left">
-                    <h2 class="text-gray-500 text-sm tracking-widest font-bold mb-2 uppercase">Character Level 90 | Constellation 6</h2>
-                    <h1 class="text-5xl font-bold mb-4 text-slate-800">Alex · 前端工程師</h1>
-                    <div class="flex justify-center md:justify-start gap-1 mb-6">
-                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                    </div>
-                    <p class="text-lg text-slate-600 max-w-xl leading-relaxed mb-8">
-                        你好！我是 Alex，一個熱愛寫程式的前端開發者。我喜歡把複雜的後端邏輯變成漂亮、好用的網頁介面，目標是讓每個點進網站的人都能有最順暢的操作體驗。
-                    </p>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <button class="genshin-btn" onclick="switchSection('portfolio')">查看作品集</button>
-                        <button class="border-2 border-slate-300 text-slate-600 px-6 py-2 rounded-full hover:bg-slate-100 transition font-bold" onclick="openContact()">聯繫我</button>
-                    </div>
-                </div>
+    <main class="mx-auto max-w-6xl px-4 sm:px-6">
+        <section id="home" class="grid min-h-[72vh] items-center gap-10 py-14 md:grid-cols-[.8fr_1.2fr] md:py-20">
+            <div class="mx-auto w-48 sm:w-60 md:w-full md:max-w-sm">
+                <div class="rounded-full border-[3px] border-amber-600/30 p-2 shadow-xl shadow-amber-900/10"><img src="my_photo.jpg" alt="Alex" class="aspect-square w-full rounded-full object-cover"></div>
+            </div>
+            <div class="text-center md:text-left">
+                <p class="mb-3 text-sm font-bold tracking-wide gold" data-i18n="eyebrow">台中在地服務｜可面談・全台與海外線上合作</p>
+                <h1 class="mb-5 text-3xl font-bold leading-tight text-slate-800 sm:text-4xl lg:text-5xl" data-i18n="heroTitle">幫品牌與在地好店，打造會帶客、留熟客的專屬網站與會員系統</h1>
+                <p class="mx-auto mb-7 max-w-2xl text-base leading-8 text-slate-600 md:mx-0 md:text-lg" data-i18n="heroBody">不用懂複雜的電腦技術，從店面形象網頁、活動宣傳，到會員集點與後台管理，幫你把網路上的客人變成長期回購的熟客。（台中在地服務｜可約店面面對面討論，全台與海外皆可線上合作）</p>
+                <div class="flex flex-wrap justify-center gap-3 md:justify-start"><a class="button" href="#services" data-i18n="heroCta">看看服務方案</a><a class="button button-outline" href="#contact" data-i18n="heroContact">先聊聊需求</a></div>
             </div>
         </section>
 
-        <!-- 作品集 -->
-        <section id="portfolio" class="content-section hidden-section">
-            <h2 class="genshin-title text-3xl font-bold mb-12 text-center w-full uppercase tracking-tighter">作品展示</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 作品卡片 -->
-                <div class="genshin-card p-4">
-                    <div class="h-48 bg-slate-200 mb-4 rounded flex items-center justify-center relative group">
-                        <span class="text-slate-400">專案預覽圖 (16:9)</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">提瓦特電子商務平台</h3>
-                    <p class="text-sm text-slate-500 mb-4">使用 React 開發的購物商城。</p>
-                    <div class="flex gap-2">
-                        <span class="tag px-2 py-1 text-xs rounded">React</span>
-                        <span class="tag px-2 py-1 text-xs rounded">Tailwind</span>
-                    </div>
-                </div>
+        <section id="audience" class="scroll-mt-28 py-14 md:py-20">
+            <div class="mb-9 text-center"><p class="mb-2 text-sm font-bold gold" data-i18n="audienceKicker">從你的經營情境開始</p><h2 class="section-title text-2xl font-bold text-slate-800 sm:text-3xl" data-i18n="audienceTitle">看看哪一種服務最適合你</h2></div>
+            <div class="grid gap-5 md:grid-cols-3">
+                <article class="card card-accent p-6"><div class="mb-4 text-3xl" aria-hidden="true">☕</div><h3 class="mb-3 text-xl font-bold text-slate-800" data-i18n="aud1Title">餐飲與實體門市</h3><p class="leading-7 text-slate-600" data-i18n="aud1Body">建立專業網路門面、線上菜單與活動宣傳頁，搭配會員集點與手機即可操作的管理後台，把過路客變成回購熟客。</p></article>
+                <article class="card card-accent p-6"><div class="mb-4 text-3xl" aria-hidden="true">✦</div><h3 class="mb-3 text-xl font-bold text-slate-800" data-i18n="aud2Title">個人品牌與工作室</h3><p class="leading-7 text-slate-600" data-i18n="aud2Body">整合經歷、作品集、服務價目與一鍵預約表單，擺脫 IG 貼文資訊零散的困擾，提升專業度與諮詢轉換率。</p></article>
+                <article class="card card-accent p-6"><div class="mb-4 text-3xl" aria-hidden="true">↗</div><h3 class="mb-3 text-xl font-bold text-slate-800" data-i18n="aud3Title">新創專案與 MVP 開發</h3><p class="leading-7 text-slate-600" data-i18n="aud3Body">快速將商業點子轉化為可實際操作的互動網頁與系統原型，支援前後端 API 串接與清晰架構，加速產品驗證與上線。</p></article>
             </div>
         </section>
 
-        <!-- 技能 / 天賦 -->
-        <section id="skills" class="content-section hidden-section">
-            <h2 class="genshin-title text-3xl font-bold mb-12 text-center w-full uppercase">接案類型</h2>
-            <div class="max-w-3xl mx-auto space-y-8">
-                <div class="genshin-card p-6 flex items-start gap-6">
-                    <div class="flex-1">
-                        <div class="flex justify-between mb-2">
-                            <h3 class="font-bold text-lg text-slate-800">前端建構</h3>
-                            <span class="text-slate-500 font-bold">Lv.10</span>
-                        </div>
-                        <p class="text-slate-500 text-sm mb-4">精通 HTML 與 CSS 佈局，處理各種兼容性挑戰。</p>
-                        <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
-                    </div>
-                </div>
-                <div class="genshin-card p-6 flex items-start gap-6">
-                    <div class="flex-1">
-                        <div class="flex justify-between mb-2">
-                            <h3 class="font-bold text-lg text-slate-800">React 全域管理</h3>
-                            <span class="text-slate-500 font-bold">Lv.9</span>
-                        </div>
-                        <p class="text-slate-500 text-sm mb-4">掌握 React 生態系，專注於高效能狀態管理。</p>
-                        <div class="skill-bar"><div class="skill-progress" data-width="88%"></div></div>
-                    </div>
-                </div>
+        <section id="services" class="scroll-mt-28 py-14 md:py-20">
+            <div class="mb-9 text-center"><p class="mb-2 text-sm font-bold gold" data-i18n="servicesKicker">價格清楚，內容依需求規劃</p><h2 class="section-title text-2xl font-bold text-slate-800 sm:text-3xl" data-i18n="servicesTitle">從品牌門面到熟客經營</h2></div>
+            <div class="mx-auto max-w-4xl space-y-5">
+                <article class="card card-accent p-6 sm:p-8">
+                    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><p class="mb-1 text-sm font-bold gold" data-i18n="plan1Kicker">PLAN 01</p><h3 class="text-xl font-bold text-slate-800 sm:text-2xl" data-i18n="plan1Title">形象與活動網頁</h3></div><p class="text-lg font-bold leading-snug gold sm:text-xl" data-i18n="plan1Price">NT$ 15,000 起 <span class="text-sm font-medium">（約 ~$500 USD）</span></p></div>
+                    <p class="mb-4 text-sm font-bold text-slate-700" data-i18n="plan1For">適合：餐廳門市、個人品牌、活動宣傳或作品展示。</p><p class="mb-4 leading-7 text-slate-600" data-i18n="plan1Body">打造手機與電腦皆流暢好瀏覽的專屬門面，包含視覺排版、菜單或商品展示、地圖導航與一鍵聯絡／預約功能。沒有完整文案也可協助整理。</p><p class="border-t border-slate-100 pt-4 text-sm leading-6 text-slate-500" data-i18n="plan1Extra">本方案聚焦於前端介面與形象呈現；若有網域主機代辦、進階會員或後台需求，皆可依實際需求規劃加購。</p>
+                </article>
+                <article class="card card-accent p-6 sm:p-8">
+                    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><p class="mb-1 text-sm font-bold gold" data-i18n="plan2Kicker">PLAN 02</p><h3 class="text-xl font-bold text-slate-800 sm:text-2xl" data-i18n="plan2Title">品牌官網＋會員／後台系統</h3></div><p class="text-lg font-bold leading-snug gold sm:text-xl" data-i18n="plan2Price">NT$ 40,000 起 <span class="text-sm font-medium">（約 ~$1,300 USD）</span></p></div>
+                    <p class="mb-4 text-sm font-bold text-slate-700" data-i18n="plan2For">適合：想經營熟客會員、管理訂單預約，或需要多頁面互動與客製系統的店家與團隊。</p><p class="mb-4 leading-7 text-slate-600" data-i18n="plan2Body">包含多頁面網站開發、客製化會員功能（集點、優惠券或分級制度）與簡單直覺的管理後台，老闆用手機或平板就能輕鬆管理。</p><p class="border-t border-slate-100 pt-4 text-sm leading-6 text-slate-500" data-i18n="plan2Extra">若有線上金流收款、LINE 通知串接或特殊系統邏輯，將依實際營運需求提供完整評估與報價。</p>
+                </article>
+            </div>
+            <p class="mx-auto mt-5 max-w-4xl text-center text-xs leading-6 text-slate-500" data-i18n="priceNote">以上為個人接案參考起始價格，實際費用將依頁面數量與功能複雜度調整；既有網站的局部修改或功能追加另行報價。</p>
+        </section>
+
+        <section id="process" class="scroll-mt-28 py-14 md:py-20">
+            <div class="mb-9 text-center"><p class="mb-2 text-sm font-bold gold" data-i18n="processKicker">每一步都清楚好掌握</p><h2 class="section-title text-2xl font-bold text-slate-800 sm:text-3xl" data-i18n="processTitle">合作方式</h2></div>
+            <div class="grid gap-5 md:grid-cols-3">
+                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">01</p><h3 class="mb-2 text-lg font-bold text-slate-800" data-i18n="step1Title">聊聊需求 <span class="font-medium">/ Share Your Idea</span></h3><p class="leading-7 text-slate-600" data-i18n="step1Body">來信或加 LINE 告訴我你的營業項目、想達成的目標、參考網站與預計上線時間。台中老闆歡迎直接約店面或咖啡廳當面聊。</p></article>
+                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">02</p><h3 class="mb-2 text-lg font-bold text-slate-800" data-i18n="step2Title">聽建議與報價 <span class="font-medium">/ Clear Proposal &amp; Quote</span></h3><p class="leading-7 text-slate-600" data-i18n="step2Body">我會根據你的預算規劃最適合的做法，提供清楚的項目清單、完工時間與報價明細。雙方確認無誤後才開始製作。</p></article>
+                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">03</p><h3 class="mb-2 text-lg font-bold text-slate-800" data-i18n="step3Title">試用與上線 <span class="font-medium">/ Preview &amp; Launch</span></h3><p class="leading-7 text-slate-600" data-i18n="step3Body">製作期間提供可預覽的測試網址讓你實際操作，確認版面與後台好上手、微調至滿意後正式上線並提供使用教學。</p></article>
+            </div>
+        </section>
+
+        <section id="portfolio" class="scroll-mt-28 py-14 md:py-20">
+            <div class="mb-9 text-center"><p class="mb-2 text-sm font-bold gold" data-i18n="portfolioKicker">實際做過，歡迎打開體驗</p><h2 class="section-title text-2xl font-bold text-slate-800 sm:text-3xl" data-i18n="portfolioTitle">作品展示</h2></div>
+            <div class="grid gap-5 md:grid-cols-3">
+                <article class="card card-accent flex flex-col p-6"><h3 class="mb-2 text-xl font-bold text-slate-800" data-i18n="work1Title">五子棋</h3><p class="mb-5 flex-1 leading-7 text-slate-600" data-i18n="work1Body">打開網頁就能開始對弈，讓訪客快速理解玩法並直接互動。</p><a class="button button-outline w-full" href="https://lex-h.github.io/7_renju/" target="_blank" rel="noopener noreferrer" data-i18n="viewProject">開啟作品</a></article>
+                <article class="card card-accent flex flex-col p-6"><h3 class="mb-2 text-xl font-bold text-slate-800" data-i18n="work2Title">撲克牌接龍</h3><p class="mb-5 flex-1 leading-7 text-slate-600" data-i18n="work2Body">支援翻牌與拖曳操作，呈現清楚直覺的互動流程。</p><a class="button button-outline w-full" href="https://lex-h.github.io/8_solitaire/" target="_blank" rel="noopener noreferrer" data-i18n="viewProject">開啟作品</a></article>
+                <article class="card card-accent flex flex-col p-6"><h3 class="mb-2 text-xl font-bold text-slate-800" data-i18n="work3Title">地圖輪播</h3><p class="mb-5 flex-1 leading-7 text-slate-600" data-i18n="work3Body">把地圖與圖片輪播整合在同一頁，方便訪客一邊瀏覽、一邊掌握地點資訊。</p><a class="button button-outline w-full" href="https://lex-h.github.io/6_mapWithCarousel/" target="_blank" rel="noopener noreferrer" data-i18n="viewProject">開啟作品</a></article>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-mt-28 py-14 md:py-20">
+            <div class="card card-accent mx-auto max-w-4xl px-5 py-10 text-center sm:px-10 sm:py-14">
+                <p class="mb-2 text-sm font-bold gold" data-i18n="contactKicker">台中全區可面談｜全台與海外皆可線上接案</p>
+                <h2 class="mb-4 text-2xl font-bold leading-snug text-slate-800 sm:text-3xl" data-i18n="contactTitle">還在猶豫適合做哪一種？先聊聊不用錢</h2>
+                <p class="mx-auto mb-7 max-w-2xl leading-7 text-slate-600" data-i18n="contactBody">告訴我你的店名、服務項目與想法，我會給你最實在的建議。</p>
+                <div class="mb-6 flex flex-wrap justify-center gap-3"><button class="button button-outline" id="copyEmail" type="button" data-i18n="copyEmail">複製 Email</button><a class="button" href="mailto:dream.huang.314@gmail.com?subject=%E7%B6%B2%E7%AB%99%E5%90%88%E4%BD%9C%E6%B4%BD%E8%AB%87" data-i18n="sendEmail">寄信洽談</a><a class="button line-button" id="lineButton" href="https://lin.ee/NgJISAAf" target="_blank" rel="noopener noreferrer" data-i18n="lineButton">加 LINE 聊聊</a></div>
+                <p id="emailAddress" class="mb-3 font-semibold text-slate-700">dream.huang.314@gmail.com</p>
+                <p id="copyStatus" class="min-h-6 text-sm text-slate-500" role="status" aria-live="polite"></p>
+                <p class="mt-3 text-sm leading-6 text-slate-500" data-i18n="serviceArea">台中全區可面談｜全台與海外皆可線上接案</p>
             </div>
         </section>
     </main>
 
-    <footer class="mt-20 py-10 border-t border-gray-200 bg-white/50 text-center">
-        <p class="text-slate-400 text-sm mb-2">© 2024 Traveler Frontend · 來自提瓦特的開發者</p>
-        <p class="text-slate-300 text-xs uppercase tracking-widest font-bold">May the wind guide your path</p>
+    <footer class="border-t border-slate-200 bg-white/70 px-4 py-8 text-center text-sm text-slate-500">
+        <p data-i18n="footerLine">網站與會員服務，讓好生意更容易被看見、被記住。</p>
+        <p class="mt-2">© 2026 Alex</p>
     </footer>
 
     <script>
-        // 點擊特效
-        document.addEventListener('mousedown', function(e) {
-            const effect = document.createElement('div');
-            effect.className = 'click-effect';
-            effect.style.left = (e.clientX - 12) + 'px';
-            effect.style.top = (e.clientY - 12) + 'px';
-            document.body.appendChild(effect);
-            setTimeout(() => effect.remove(), 500);
-        });
-
-        // 頁面切換邏輯
-        function switchSection(targetId) {
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.add('hidden-section');
-            });
-            document.getElementById(targetId).classList.remove('hidden-section');
-            
-            document.querySelectorAll('.side-nav-item').forEach(item => {
-                item.classList.toggle('active', item.dataset.target === targetId);
-            });
-
-            if(targetId === 'skills') animateSkillBars();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        /**
-         * 聯繫我功能（修復版）
-         * 1. 複製 Email 到剪貼簿 (防止 mailto 失效)
-         * 2. 嘗試開啟郵件軟體
-         */
-        function openContact() {
-            const email = "dream.huang.314@gmail.com";
-            const subject = "冒險委託：來自作品集的聯繫";
-            const body = "你好 Alex，我在你的作品集看到你的資訊，想進一步洽談...";
-            
-            const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            // 1. 執行複製到剪貼簿 (相容性寫法)
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(email);
-            } else {
-                // 舊瀏覽器備用方案
-                const textArea = document.createElement("textarea");
-                textArea.value = email;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("Copy");
-                textArea.remove();
+        const translations = {
+            zh: {
+                pageTitle:'Alex｜品牌網站與會員系統', metaDescription:'幫台中在地好店與品牌打造能帶客、留熟客的網站與會員系統。台中可面談，全台與海外線上合作。', brand:'品牌網站與會員系統', navAudience:'服務對象', navServices:'服務方案', navProcess:'合作方式', navPortfolio:'作品', navContact:'聯絡',
+                eyebrow:'台中在地服務｜可面談・全台與海外線上合作', heroTitle:'幫品牌與在地好店，打造會帶客、留熟客的專屬網站與會員系統', heroBody:'不用懂複雜的電腦技術，從店面形象網頁、活動宣傳，到會員集點與後台管理，幫你把網路上的客人變成長期回購的熟客。（台中在地服務｜可約店面面對面討論，全台與海外皆可線上合作）', heroCta:'看看服務方案', heroContact:'先聊聊需求',
+                audienceKicker:'從你的經營情境開始', audienceTitle:'看看哪一種服務最適合你', aud1Title:'餐飲與實體門市', aud1Body:'建立專業網路門面、線上菜單與活動宣傳頁，搭配會員集點與手機即可操作的管理後台，把過路客變成回購熟客。', aud2Title:'個人品牌與工作室', aud2Body:'整合經歷、作品集、服務價目與一鍵預約表單，擺脫 IG 貼文資訊零散的困擾，提升專業度與諮詢轉換率。', aud3Title:'新創專案與 MVP 開發', aud3Body:'快速將商業點子轉化為可實際操作的互動網頁與系統原型，支援前後端 API 串接與清晰架構，加速產品驗證與上線。',
+                servicesKicker:'價格清楚，內容依需求規劃', servicesTitle:'從品牌門面到熟客經營', plan1Kicker:'方案一', plan1Title:'形象與活動網頁', plan1Price:'NT$ 15,000 起（約 ~$500 USD）', plan1For:'適合：餐廳門市、個人品牌、活動宣傳或作品展示。', plan1Body:'打造手機與電腦皆流暢好瀏覽的專屬門面，包含視覺排版、菜單或商品展示、地圖導航與一鍵聯絡／預約功能。沒有完整文案也可協助整理。', plan1Extra:'本方案聚焦於前端介面與形象呈現；若有網域主機代辦、進階會員或後台需求，皆可依實際需求規劃加購。', plan2Kicker:'方案二', plan2Title:'品牌官網＋會員／後台系統', plan2Price:'NT$ 40,000 起（約 ~$1,300 USD）', plan2For:'適合：想經營熟客會員、管理訂單預約，或需要多頁面互動與客製系統的店家與團隊。', plan2Body:'包含多頁面網站開發、客製化會員功能（集點、優惠券或分級制度）與簡單直覺的管理後台，老闆用手機或平板就能輕鬆管理。', plan2Extra:'若有線上金流收款、LINE 通知串接或特殊系統邏輯，將依實際營運需求提供完整評估與報價。', priceNote:'以上為個人接案參考起始價格，實際費用將依頁面數量與功能複雜度調整；既有網站的局部修改或功能追加另行報價。',
+                processKicker:'每一步都清楚好掌握', processTitle:'合作方式', step1Title:'聊聊需求 / Share Your Idea', step1Body:'來信或加 LINE 告訴我你的營業項目、想達成的目標、參考網站與預計上線時間。台中老闆歡迎直接約店面或咖啡廳當面聊。', step2Title:'聽建議與報價 / Clear Proposal & Quote', step2Body:'我會根據你的預算規劃最適合的做法，提供清楚的項目清單、完工時間與報價明細。雙方確認無誤後才開始製作。', step3Title:'試用與上線 / Preview & Launch', step3Body:'製作期間提供可預覽的測試網址讓你實際操作，確認版面與後台好上手、微調至滿意後正式上線並提供使用教學。',
+                portfolioKicker:'實際做過，歡迎打開體驗', portfolioTitle:'作品展示', work1Title:'五子棋', work1Body:'打開網頁就能開始對弈，讓訪客快速理解玩法並直接互動。', work2Title:'撲克牌接龍', work2Body:'支援翻牌與拖曳操作，呈現清楚直覺的互動流程。', work3Title:'地圖輪播', work3Body:'把地圖與圖片輪播整合在同一頁，方便訪客一邊瀏覽、一邊掌握地點資訊。', viewProject:'開啟作品',
+                contactKicker:'台中全區可面談｜全台與海外皆可線上接案', contactTitle:'還在猶豫適合做哪一種？先聊聊不用錢', contactBody:'告訴我你的店名、服務項目與想法，我會給你最實在的建議。', copyEmail:'複製 Email', sendEmail:'寄信洽談', lineButton:'加 LINE 聊聊', serviceArea:'台中全區可面談｜全台與海外皆可線上接案', footerLine:'網站與會員服務，讓好生意更容易被看見、被記住。', copied:'Email 已複製。', copyFailed:'無法自動複製，請選取上方 Email 複製。'
+            },
+            en: {
+                pageTitle:'Alex | Websites & Member Systems', metaDescription:'Custom websites and member systems that help businesses in Taiwan attract customers and build loyalty. Based in Taichung, working worldwide.', brand:'Websites & Member Systems', navAudience:'Who I Help', navServices:'Services', navProcess:'How It Works', navPortfolio:'Work', navContact:'Contact',
+                eyebrow:'Based in Taichung · In-person meetings available · Worldwide remote', heroTitle:'Custom Websites That Help Local Businesses Attract Customers and Keep Them Coming Back', heroBody:'From a polished storefront and campaign pages to loyalty programs and easy admin tools, I help turn online visitors into returning customers. Meet in person in Taichung, or work together online from anywhere.', heroCta:'Explore Services', heroContact:'Let’s Talk',
+                audienceKicker:'Solutions for your business', audienceTitle:'Find the right fit for you', aud1Title:'Restaurants & Local Shops', aud1Body:'Showcase your brand, menu, and promotions with mobile-friendly pages, loyalty tools, and an admin experience you can manage from your phone.', aud2Title:'Personal Brands & Studios', aud2Body:'Bring your story, portfolio, services, and booking form together in one polished place, so clients can find what they need and reach out with confidence.', aud3Title:'Startups & MVP Projects', aud3Body:'Turn an idea into a working web prototype with interactive experiences and connected services, so your team can validate the product and move toward launch.',
+                servicesKicker:'Clear starting prices, tailored to your needs', servicesTitle:'From your online storefront to customer loyalty', plan1Kicker:'PLAN 01', plan1Title:'Brand & Campaign Website', plan1Price:'From NT$ 15,000 (~$500 USD)', plan1For:'For restaurants, local shops, personal brands, campaigns, and portfolios.', plan1Body:'A polished website that works smoothly on phones and computers, with visual layout, menu or product showcases, maps, and one-tap contact or booking. I can help organize your copy if it is not ready yet.', plan1Extra:'Focused on your website experience and brand presentation. Domain and hosting setup, advanced membership features, or admin tools can be scoped as add-ons.', plan2Kicker:'PLAN 02', plan2Title:'Business Website + Member & Admin System', plan2Price:'From NT$ 40,000 (~$1,300 USD)', plan2For:'For businesses that want to grow loyalty, manage bookings or orders, or build a tailored interactive service.', plan2Body:'Includes a multi-page website, custom membership features such as points, coupons, or tiers, and a straightforward admin dashboard you can manage from a phone or tablet.', plan2Extra:'Online payments, LINE notifications, and custom business logic are scoped and quoted based on your workflow.', priceNote:'Starting rates for reference. Final pricing depends on page count and feature complexity. Updates to existing websites are quoted separately.',
+                processKicker:'A clear process from start to launch', processTitle:'How It Works', step1Title:'Share Your Idea', step1Body:'Email me your business, goals, reference websites, and target launch date. In-person meetings are available at your shop or a cafe in Taichung.', step2Title:'Get a Clear Plan & Quote', step2Body:'I’ll recommend an approach that fits your budget and share a clear scope, timeline, and itemized quote. Work starts after you approve the details.', step3Title:'Preview & Launch', step3Body:'Try a preview site during development, share feedback, and refine the experience. Once everything feels right, we launch and I’ll walk you through using it.',
+                portfolioKicker:'Real projects you can try', portfolioTitle:'Selected Work', work1Title:'Gomoku', work1Body:'A browser-based board game visitors can jump into and play right away.', work2Title:'Solitaire', work2Body:'A card game with clear interactions for flipping and dragging cards.', work3Title:'Map & Carousel', work3Body:'Combines a map and image carousel so visitors can browse visuals alongside location details.', viewProject:'View Project',
+                contactKicker:'Taichung in-person · Taiwan and worldwide remote', contactTitle:'Not sure which solution fits best? Let’s have a quick chat.', contactBody:'Tell me about your business and goals, and I’ll share practical recommendations.', copyEmail:'Copy Email', sendEmail:'Email Me', lineButton:'Chat on LINE', serviceArea:'Taichung in-person meetings · Remote projects across Taiwan and worldwide', footerLine:'Thoughtful websites and member tools that help good businesses get noticed and remembered.', copied:'Email copied.', copyFailed:'Could not copy automatically. Please select and copy the email above.'
             }
-
-            // 2. 顯示 UI 提示
-            const msg = document.createElement('div');
-            msg.className = 'toast-msg';
-            msg.innerHTML = '<span style="color: #c6a05d; font-size:1.2em;">✦</span> <span>Email 已複製！正在喚醒郵件程式...</span>';
-            document.body.appendChild(msg);
-            
-            // 移除提示
-            setTimeout(() => msg.remove(), 3000);
-
-            // 3. 嘗試開啟郵件系統 (使用 location.href 較為穩定)
-            setTimeout(() => {
-                window.location.href = mailtoUrl;
-            }, 600);
-        }
-
-        // 導航點擊事件
-        document.querySelectorAll('.side-nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                switchSection(this.dataset.target);
-            });
-        });
-
-        // 技能條動畫
-        function animateSkillBars() {
-            setTimeout(() => {
-                document.querySelectorAll('.skill-progress').forEach(bar => {
-                    bar.style.width = bar.dataset.width;
-                });
-            }, 100);
-        }
-
-        window.onload = () => {
-            console.log("系統就緒：Email 功能已修復。");
         };
+        const languageButtons = document.querySelectorAll('[data-language]');
+        function setLanguage(language) {
+            const selected = translations[language] ? language : 'zh';
+            document.documentElement.lang = selected === 'zh' ? 'zh-TW' : 'en';
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.dataset.i18n;
+                if (translations[selected][key]) element.textContent = translations[selected][key];
+            });
+            document.querySelector('meta[name="description"]').content = translations[selected].metaDescription;
+            document.querySelector('meta[property="og:title"]').content = translations[selected].pageTitle;
+            document.querySelector('meta[property="og:description"]').content = translations[selected].metaDescription;
+            languageButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === selected)));
+            try { localStorage.setItem('site-language', selected); } catch (_) {}
+        }
+        languageButtons.forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.language)));
+        let savedLanguage = 'zh';
+        try { savedLanguage = localStorage.getItem('site-language') || 'zh'; } catch (_) {}
+        setLanguage(savedLanguage);
+
+        document.getElementById('copyEmail').addEventListener('click', async () => {
+            const email = 'dream.huang.314@gmail.com';
+            const status = document.getElementById('copyStatus');
+            const language = document.documentElement.lang === 'en' ? 'en' : 'zh';
+            try {
+                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(email);
+                else {
+                    const field = document.createElement('textarea'); field.value = email; field.style.position = 'fixed'; field.style.opacity = '0'; document.body.appendChild(field); field.select();
+                    const copied = document.execCommand('copy'); field.remove(); if (!copied) throw new Error('copy failed');
+                }
+                status.textContent = translations[language].copied;
+            } catch (_) { status.textContent = translations[language].copyFailed; }
+        });
     </script>
 </body>
 </html>
