@@ -8,34 +8,18 @@
     <meta property="og:description" content="從品牌形象、線上菜單到會員集點與管理後台，讓網路訪客成為長期熟客。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lex-h.github.io/personal_page/">
-    <meta property="og:image" content="https://lex-h.github.io/personal_page/my_photo.jpg">
+    <meta property="og:image" content="https://lex-h.github.io/personal_page/og_image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Alex 手持相機的照片">
     <meta property="og:locale" content="zh_TW">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Alex｜Custom Websites & Member Systems">
-    <meta name="twitter:description" content="Websites and member tools that help local businesses attract customers and build loyalty.">
-    <meta name="twitter:image" content="https://lex-h.github.io/personal_page/my_photo.jpg">
+    <meta name="twitter:image" content="https://lex-h.github.io/personal_page/og_image.jpg">
     <title data-i18n="pageTitle">Alex｜品牌網站與會員系統</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --gold:#c6a05d; --ink:#3b4250; --paper:#f5f6f7; }
-        html { scroll-behavior:smooth; scroll-padding-top:88px; }
-        body { font-family:'Noto Sans TC',sans-serif; color:var(--ink); background:radial-gradient(circle at 50% 0,#fff 0,#f1f2f4 75%); }
-        .card { background:rgba(255,255,255,.88); border:1px solid rgba(74,83,99,.15); border-radius:14px; box-shadow:0 8px 28px rgba(30,41,59,.06); }
-        .card-accent { border-top:3px solid var(--gold); }
-        .gold { color:#8a6a2f; }
-        .button { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:10px 22px; border:1px solid var(--ink); border-radius:999px; background:var(--ink); color:white; font-weight:700; transition:.2s; }
-        .button:hover { background:transparent; color:var(--ink); }
-        .button-outline { background:transparent; color:var(--ink); }
-        .lang-button { border:1px solid rgba(59,66,80,.2); border-radius:999px; padding:8px 12px; font-size:14px; font-weight:700; }
-        .lang-button[aria-pressed="true"] { color:#fff; background:var(--ink); }
-        .section-title { letter-spacing:.04em; }
-        .line-button { background:#06c755; border-color:#06c755; }
-        .line-button:hover { background:#05ad49; border-color:#05ad49; color:#fff; }
-        .line-button:disabled { cursor:not-allowed; opacity:.7; }
-        :focus-visible { outline:3px solid #c6a05d; outline-offset:3px; }
-        @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition-duration:.01ms !important; animation-duration:.01ms !important; } }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen">
     <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -48,25 +32,38 @@
                 <a href="#portfolio" data-i18n="navPortfolio" class="hover:text-amber-800">作品</a>
                 <a href="#contact" data-i18n="navContact" class="hover:text-amber-800">聯絡</a>
             </nav>
-            <div class="flex shrink-0 gap-1" aria-label="Language selector">
-                <button class="lang-button" type="button" data-language="zh" aria-pressed="true">中</button>
-                <button class="lang-button" type="button" data-language="en" aria-pressed="false">EN</button>
+            <div class="hidden shrink-0 md:flex">
+                <div class="lang-picker" data-lang-picker><button type="button" class="lang-trigger" id="languageDesktop" aria-haspopup="listbox" aria-expanded="false"><span data-lang-current>繁體中文</span><svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ul class="lang-list" role="listbox" tabindex="-1" aria-labelledby="languageDesktop" hidden></ul></div>
             </div>
+            <button id="menuButton" class="menu-button md:hidden" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="開啟選單">
+                <svg class="menu-icon-open h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                <svg class="menu-icon-close h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
         </div>
-        <nav class="flex gap-5 overflow-x-auto px-4 pb-3 text-sm font-medium md:hidden" aria-label="頁面導覽">
-            <a href="#audience" data-i18n="navAudience" class="whitespace-nowrap">服務對象</a><a href="#services" data-i18n="navServices" class="whitespace-nowrap">服務方案</a><a href="#process" data-i18n="navProcess" class="whitespace-nowrap">合作方式</a><a href="#portfolio" data-i18n="navPortfolio" class="whitespace-nowrap">作品</a><a href="#contact" data-i18n="navContact" class="whitespace-nowrap">聯絡</a>
-        </nav>
+        <div id="mobileMenu" class="mobile-menu md:hidden" hidden>
+            <nav class="border-t border-slate-200/80 px-4 pb-4 pt-2" aria-label="頁面導覽">
+                <a href="#audience" data-i18n="navAudience" class="mobile-link">服務對象</a>
+                <a href="#services" data-i18n="navServices" class="mobile-link">服務方案</a>
+                <a href="#process" data-i18n="navProcess" class="mobile-link">合作方式</a>
+                <a href="#portfolio" data-i18n="navPortfolio" class="mobile-link">作品</a>
+                <a href="#contact" data-i18n="navContact" class="mobile-link">聯絡</a>
+                <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
+                    <span class="text-sm font-medium text-slate-500" data-i18n="languageLabel">語言</span>
+                    <div class="lang-picker lang-picker--inline" data-lang-picker><button type="button" class="lang-trigger" id="languageMobile" aria-haspopup="listbox" aria-expanded="false"><span data-lang-current>繁體中文</span><svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ul class="lang-list" role="listbox" tabindex="-1" aria-labelledby="languageMobile" hidden></ul></div>
+                </div>
+            </nav>
+        </div>
     </header>
 
     <main class="mx-auto max-w-6xl px-4 sm:px-6">
         <section id="home" class="grid min-h-[72vh] items-center gap-10 py-14 md:grid-cols-[.8fr_1.2fr] md:py-20">
             <div class="mx-auto w-48 sm:w-60 md:w-full md:max-w-sm">
-                <div class="rounded-full border-[3px] border-amber-600/30 p-2 shadow-xl shadow-amber-900/10"><img src="my_photo.jpg" alt="Alex" class="aspect-square w-full rounded-full object-cover"></div>
+                <div class="rounded-full border-[3px] border-amber-600/30 p-2 shadow-xl shadow-amber-900/10"><img src="my_photo.jpg" alt="Alex 手持相機的照片" width="800" height="800" class="aspect-square w-full rounded-full object-cover"></div>
             </div>
             <div class="text-center md:text-left">
                 <p class="mb-3 text-sm font-bold tracking-wide gold" data-i18n="eyebrow">台中在地服務｜可面談・全台與海外線上合作</p>
                 <h1 class="mb-5 text-3xl font-bold leading-tight text-slate-800 sm:text-4xl lg:text-5xl" data-i18n="heroTitle">幫品牌與在地好店，打造會帶客、留熟客的專屬網站與會員系統</h1>
-                <p class="mx-auto mb-7 max-w-2xl text-base leading-8 text-slate-600 md:mx-0 md:text-lg" data-i18n="heroBody">不用懂複雜的電腦技術，從店面形象網頁、活動宣傳，到會員集點與後台管理，幫你把網路上的客人變成長期回購的熟客。（台中在地服務｜可約店面面對面討論，全台與海外皆可線上合作）</p>
+                <p class="mx-auto mb-7 max-w-2xl text-base leading-8 text-slate-600 md:mx-0 md:text-lg" data-i18n="heroBody">不用懂複雜的電腦技術，從店面形象網頁、活動宣傳，到會員集點與後台管理，幫你把網路上的客人變成長期回購的熟客。</p>
                 <div class="flex flex-wrap justify-center gap-3 md:justify-start"><a class="button" href="#services" data-i18n="heroCta">看看服務方案</a><a class="button button-outline" href="#contact" data-i18n="heroContact">先聊聊需求</a></div>
             </div>
         </section>
@@ -84,11 +81,11 @@
             <div class="mb-9 text-center"><p class="mb-2 text-sm font-bold gold" data-i18n="servicesKicker">價格清楚，內容依需求規劃</p><h2 class="section-title text-2xl font-bold text-slate-800 sm:text-3xl" data-i18n="servicesTitle">從品牌門面到熟客經營</h2></div>
             <div class="mx-auto max-w-4xl space-y-5">
                 <article class="card card-accent p-6 sm:p-8">
-                    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><p class="mb-1 text-sm font-bold gold" data-i18n="plan1Kicker">PLAN 01</p><h3 class="text-xl font-bold text-slate-800 sm:text-2xl" data-i18n="plan1Title">形象與活動網頁</h3></div><p class="text-lg font-bold leading-snug gold sm:text-xl" data-i18n="plan1Price">NT$ 15,000 起 <span class="text-sm font-medium">（約 ~$500 USD）</span></p></div>
+                    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><p class="mb-1 text-sm font-bold gold">PLAN 01</p><h3 class="text-xl font-bold text-slate-800 sm:text-2xl" data-i18n="plan1Title">形象與活動網頁</h3></div><p class="text-lg font-bold leading-snug gold sm:text-xl"><span data-i18n="plan1Price">NT$ 15,000 起</span> <span class="text-sm font-medium" data-i18n="plan1PriceUsd">（約 ~$500 USD）</span></p></div>
                     <p class="mb-4 text-sm font-bold text-slate-700" data-i18n="plan1For">適合：餐廳門市、個人品牌、活動宣傳或作品展示。</p><p class="mb-4 leading-7 text-slate-600" data-i18n="plan1Body">打造手機與電腦皆流暢好瀏覽的專屬門面，包含視覺排版、菜單或商品展示、地圖導航與一鍵聯絡／預約功能。沒有完整文案也可協助整理。</p><p class="border-t border-slate-100 pt-4 text-sm leading-6 text-slate-500" data-i18n="plan1Extra">本方案聚焦於前端介面與形象呈現；若有網域主機代辦、進階會員或後台需求，皆可依實際需求規劃加購。</p>
                 </article>
                 <article class="card card-accent p-6 sm:p-8">
-                    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><p class="mb-1 text-sm font-bold gold" data-i18n="plan2Kicker">PLAN 02</p><h3 class="text-xl font-bold text-slate-800 sm:text-2xl" data-i18n="plan2Title">品牌官網＋會員／後台系統</h3></div><p class="text-lg font-bold leading-snug gold sm:text-xl" data-i18n="plan2Price">NT$ 40,000 起 <span class="text-sm font-medium">（約 ~$1,300 USD）</span></p></div>
+                    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><p class="mb-1 text-sm font-bold gold">PLAN 02</p><h3 class="text-xl font-bold text-slate-800 sm:text-2xl" data-i18n="plan2Title">品牌官網＋會員／後台系統</h3></div><p class="text-lg font-bold leading-snug gold sm:text-xl"><span data-i18n="plan2Price">NT$ 40,000 起</span> <span class="text-sm font-medium" data-i18n="plan2PriceUsd">（約 ~$1,300 USD）</span></p></div>
                     <p class="mb-4 text-sm font-bold text-slate-700" data-i18n="plan2For">適合：想經營熟客會員、管理訂單預約，或需要多頁面互動與客製系統的店家與團隊。</p><p class="mb-4 leading-7 text-slate-600" data-i18n="plan2Body">包含多頁面網站開發、客製化會員功能（集點、優惠券或分級制度）與簡單直覺的管理後台，老闆用手機或平板就能輕鬆管理。</p><p class="border-t border-slate-100 pt-4 text-sm leading-6 text-slate-500" data-i18n="plan2Extra">若有線上金流收款、LINE 通知串接或特殊系統邏輯，將依實際營運需求提供完整評估與報價。</p>
                 </article>
             </div>
@@ -98,9 +95,9 @@
         <section id="process" class="scroll-mt-28 py-14 md:py-20">
             <div class="mb-9 text-center"><p class="mb-2 text-sm font-bold gold" data-i18n="processKicker">每一步都清楚好掌握</p><h2 class="section-title text-2xl font-bold text-slate-800 sm:text-3xl" data-i18n="processTitle">合作方式</h2></div>
             <div class="grid gap-5 md:grid-cols-3">
-                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">01</p><h3 class="mb-2 text-lg font-bold text-slate-800" data-i18n="step1Title">聊聊需求 <span class="font-medium">/ Share Your Idea</span></h3><p class="leading-7 text-slate-600" data-i18n="step1Body">來信或加 LINE 告訴我你的營業項目、想達成的目標、參考網站與預計上線時間。台中老闆歡迎直接約店面或咖啡廳當面聊。</p></article>
-                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">02</p><h3 class="mb-2 text-lg font-bold text-slate-800" data-i18n="step2Title">聽建議與報價 <span class="font-medium">/ Clear Proposal &amp; Quote</span></h3><p class="leading-7 text-slate-600" data-i18n="step2Body">我會根據你的預算規劃最適合的做法，提供清楚的項目清單、完工時間與報價明細。雙方確認無誤後才開始製作。</p></article>
-                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">03</p><h3 class="mb-2 text-lg font-bold text-slate-800" data-i18n="step3Title">試用與上線 <span class="font-medium">/ Preview &amp; Launch</span></h3><p class="leading-7 text-slate-600" data-i18n="step3Body">製作期間提供可預覽的測試網址讓你實際操作，確認版面與後台好上手、微調至滿意後正式上線並提供使用教學。</p></article>
+                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">01</p><h3 class="mb-2 text-lg font-bold text-slate-800" ><span data-i18n="step1Title">聊聊需求</span> <span class="font-medium" data-i18n="step1Sub">/ Share Your Idea</span></h3><p class="leading-7 text-slate-600" data-i18n="step1Body">來信或加 LINE 告訴我你的營業項目、想達成的目標、參考網站與預計上線時間。台中老闆歡迎直接約店面或咖啡廳當面聊。</p></article>
+                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">02</p><h3 class="mb-2 text-lg font-bold text-slate-800" ><span data-i18n="step2Title">聽建議與報價</span> <span class="font-medium" data-i18n="step2Sub">/ Clear Proposal &amp; Quote</span></h3><p class="leading-7 text-slate-600" data-i18n="step2Body">我會根據你的預算規劃最適合的做法，提供清楚的項目清單、完工時間與報價明細。雙方確認無誤後才開始製作。</p></article>
+                <article class="card p-6"><p class="mb-3 text-sm font-bold gold">03</p><h3 class="mb-2 text-lg font-bold text-slate-800" ><span data-i18n="step3Title">試用與上線</span> <span class="font-medium" data-i18n="step3Sub">/ Preview &amp; Launch</span></h3><p class="leading-7 text-slate-600" data-i18n="step3Body">製作期間提供可預覽的測試網址讓你實際操作，確認版面與後台好上手、微調至滿意後正式上線並提供使用教學。</p></article>
             </div>
         </section>
 
@@ -118,10 +115,13 @@
                 <p class="mb-2 text-sm font-bold gold" data-i18n="contactKicker">台中全區可面談｜全台與海外皆可線上接案</p>
                 <h2 class="mb-4 text-2xl font-bold leading-snug text-slate-800 sm:text-3xl" data-i18n="contactTitle">還在猶豫適合做哪一種？先聊聊不用錢</h2>
                 <p class="mx-auto mb-7 max-w-2xl leading-7 text-slate-600" data-i18n="contactBody">告訴我你的店名、服務項目與想法，我會給你最實在的建議。</p>
-                <div class="mb-6 flex flex-wrap justify-center gap-3"><button class="button button-outline" id="copyEmail" type="button" data-i18n="copyEmail">複製 Email</button><a class="button" href="mailto:dream.huang.314@gmail.com?subject=%E7%B6%B2%E7%AB%99%E5%90%88%E4%BD%9C%E6%B4%BD%E8%AB%87" data-i18n="sendEmail">寄信洽談</a><a class="button line-button" id="lineButton" href="https://lin.ee/NgJISAAf" target="_blank" rel="noopener noreferrer" data-i18n="lineButton">加 LINE 聊聊</a></div>
+                <div class="contact-actions mb-6">
+                    <a class="cta cta-primary" id="sendEmail" href="mailto:dream.huang.314@gmail.com?subject=%E7%B6%B2%E7%AB%99%E5%90%88%E4%BD%9C%E6%B4%BD%E8%AB%87"><svg class="cta-icon cta-icon-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="sendEmail">寄信洽談</span></a>
+                    <a class="cta cta-line" id="lineButton" href="https://lin.ee/NgJISAAf" target="_blank" rel="noopener noreferrer"><svg class="cta-icon cta-icon-bubble" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.58 2 11c0 3.96 3.6 7.27 8.46 7.9.33.07.78.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1 .88.55 1.08-.46 5.83-3.43 7.95-5.87C21.53 14.24 22 12.7 22 11c0-4.42-4.48-8-10-8z"/></svg><span data-i18n="lineButton">加 LINE 聊聊</span></a>
+                    <button class="cta cta-ghost" id="copyEmail" type="button"><span class="cta-icon cta-icon-swap" aria-hidden="true"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span id="copyLabel" data-i18n="copyEmail">複製 Email</span></button>
+                </div>
                 <p id="emailAddress" class="mb-3 font-semibold text-slate-700">dream.huang.314@gmail.com</p>
                 <p id="copyStatus" class="min-h-6 text-sm text-slate-500" role="status" aria-live="polite"></p>
-                <p class="mt-3 text-sm leading-6 text-slate-500" data-i18n="serviceArea">台中全區可面談｜全台與海外皆可線上接案</p>
             </div>
         </section>
     </main>
@@ -133,48 +133,269 @@
 
     <script>
         const translations = {
-            zh: {
-                pageTitle:'Alex｜品牌網站與會員系統', metaDescription:'幫台中在地好店與品牌打造能帶客、留熟客的網站與會員系統。台中可面談，全台與海外線上合作。', brand:'品牌網站與會員系統', navAudience:'服務對象', navServices:'服務方案', navProcess:'合作方式', navPortfolio:'作品', navContact:'聯絡',
-                eyebrow:'台中在地服務｜可面談・全台與海外線上合作', heroTitle:'幫品牌與在地好店，打造會帶客、留熟客的專屬網站與會員系統', heroBody:'不用懂複雜的電腦技術，從店面形象網頁、活動宣傳，到會員集點與後台管理，幫你把網路上的客人變成長期回購的熟客。（台中在地服務｜可約店面面對面討論，全台與海外皆可線上合作）', heroCta:'看看服務方案', heroContact:'先聊聊需求',
+            'zh-TW': {
+                pageTitle:'Alex｜品牌網站與會員系統', brand:'品牌網站與會員系統', navAudience:'服務對象', navServices:'服務方案', navProcess:'合作方式', navPortfolio:'作品', navContact:'聯絡', languageLabel:'語言', menuOpen:'開啟選單', menuClose:'關閉選單',
+                eyebrow:'台中在地服務｜可面談・全台與海外線上合作', heroTitle:'幫品牌與在地好店，打造會帶客、留熟客的專屬網站與會員系統', heroBody:'不用懂複雜的電腦技術，從店面形象網頁、活動宣傳，到會員集點與後台管理，幫你把網路上的客人變成長期回購的熟客。', heroCta:'看看服務方案', heroContact:'先聊聊需求',
                 audienceKicker:'從你的經營情境開始', audienceTitle:'看看哪一種服務最適合你', aud1Title:'餐飲與實體門市', aud1Body:'建立專業網路門面、線上菜單與活動宣傳頁，搭配會員集點與手機即可操作的管理後台，把過路客變成回購熟客。', aud2Title:'個人品牌與工作室', aud2Body:'整合經歷、作品集、服務價目與一鍵預約表單，擺脫 IG 貼文資訊零散的困擾，提升專業度與諮詢轉換率。', aud3Title:'新創專案與 MVP 開發', aud3Body:'快速將商業點子轉化為可實際操作的互動網頁與系統原型，支援前後端 API 串接與清晰架構，加速產品驗證與上線。',
-                servicesKicker:'價格清楚，內容依需求規劃', servicesTitle:'從品牌門面到熟客經營', plan1Kicker:'方案一', plan1Title:'形象與活動網頁', plan1Price:'NT$ 15,000 起（約 ~$500 USD）', plan1For:'適合：餐廳門市、個人品牌、活動宣傳或作品展示。', plan1Body:'打造手機與電腦皆流暢好瀏覽的專屬門面，包含視覺排版、菜單或商品展示、地圖導航與一鍵聯絡／預約功能。沒有完整文案也可協助整理。', plan1Extra:'本方案聚焦於前端介面與形象呈現；若有網域主機代辦、進階會員或後台需求，皆可依實際需求規劃加購。', plan2Kicker:'方案二', plan2Title:'品牌官網＋會員／後台系統', plan2Price:'NT$ 40,000 起（約 ~$1,300 USD）', plan2For:'適合：想經營熟客會員、管理訂單預約，或需要多頁面互動與客製系統的店家與團隊。', plan2Body:'包含多頁面網站開發、客製化會員功能（集點、優惠券或分級制度）與簡單直覺的管理後台，老闆用手機或平板就能輕鬆管理。', plan2Extra:'若有線上金流收款、LINE 通知串接或特殊系統邏輯，將依實際營運需求提供完整評估與報價。', priceNote:'以上為個人接案參考起始價格，實際費用將依頁面數量與功能複雜度調整；既有網站的局部修改或功能追加另行報價。',
-                processKicker:'每一步都清楚好掌握', processTitle:'合作方式', step1Title:'聊聊需求 / Share Your Idea', step1Body:'來信或加 LINE 告訴我你的營業項目、想達成的目標、參考網站與預計上線時間。台中老闆歡迎直接約店面或咖啡廳當面聊。', step2Title:'聽建議與報價 / Clear Proposal & Quote', step2Body:'我會根據你的預算規劃最適合的做法，提供清楚的項目清單、完工時間與報價明細。雙方確認無誤後才開始製作。', step3Title:'試用與上線 / Preview & Launch', step3Body:'製作期間提供可預覽的測試網址讓你實際操作，確認版面與後台好上手、微調至滿意後正式上線並提供使用教學。',
+                servicesKicker:'價格清楚，內容依需求規劃', servicesTitle:'從品牌門面到熟客經營', plan1Title:'形象與活動網頁', plan1Price:'NT$ 15,000 起', plan1PriceUsd:'（約 ~$500 USD）', plan1For:'適合：餐廳門市、個人品牌、活動宣傳或作品展示。', plan1Body:'打造手機與電腦皆流暢好瀏覽的專屬門面，包含視覺排版、菜單或商品展示、地圖導航與一鍵聯絡／預約功能。沒有完整文案也可協助整理。', plan1Extra:'本方案聚焦於前端介面與形象呈現；若有網域主機代辦、進階會員或後台需求，皆可依實際需求規劃加購。', plan2Title:'品牌官網＋會員／後台系統', plan2Price:'NT$ 40,000 起', plan2PriceUsd:'（約 ~$1,300 USD）', plan2For:'適合：想經營熟客會員、管理訂單預約，或需要多頁面互動與客製系統的店家與團隊。', plan2Body:'包含多頁面網站開發、客製化會員功能（集點、優惠券或分級制度）與簡單直覺的管理後台，老闆用手機或平板就能輕鬆管理。', plan2Extra:'若有線上金流收款、LINE 通知串接或特殊系統邏輯，將依實際營運需求提供完整評估與報價。', priceNote:'以上為個人接案參考起始價格，實際費用將依頁面數量與功能複雜度調整；既有網站的局部修改或功能追加另行報價。',
+                processKicker:'每一步都清楚好掌握', processTitle:'合作方式', step1Title:'聊聊需求', step1Sub:'/ Share Your Idea', step1Body:'來信或加 LINE 告訴我你的營業項目、想達成的目標、參考網站與預計上線時間。台中老闆歡迎直接約店面或咖啡廳當面聊。', step2Title:'聽建議與報價', step2Sub:'/ Clear Proposal & Quote', step2Body:'我會根據你的預算規劃最適合的做法，提供清楚的項目清單、完工時間與報價明細。雙方確認無誤後才開始製作。', step3Title:'試用與上線', step3Sub:'/ Preview & Launch', step3Body:'製作期間提供可預覽的測試網址讓你實際操作，確認版面與後台好上手、微調至滿意後正式上線並提供使用教學。',
                 portfolioKicker:'實際做過，歡迎打開體驗', portfolioTitle:'作品展示', work1Title:'五子棋', work1Body:'打開網頁就能開始對弈，讓訪客快速理解玩法並直接互動。', work2Title:'撲克牌接龍', work2Body:'支援翻牌與拖曳操作，呈現清楚直覺的互動流程。', work3Title:'地圖輪播', work3Body:'把地圖與圖片輪播整合在同一頁，方便訪客一邊瀏覽、一邊掌握地點資訊。', viewProject:'開啟作品',
-                contactKicker:'台中全區可面談｜全台與海外皆可線上接案', contactTitle:'還在猶豫適合做哪一種？先聊聊不用錢', contactBody:'告訴我你的店名、服務項目與想法，我會給你最實在的建議。', copyEmail:'複製 Email', sendEmail:'寄信洽談', lineButton:'加 LINE 聊聊', serviceArea:'台中全區可面談｜全台與海外皆可線上接案', footerLine:'網站與會員服務，讓好生意更容易被看見、被記住。', copied:'Email 已複製。', copyFailed:'無法自動複製，請選取上方 Email 複製。'
+                contactKicker:'台中全區可面談｜全台與海外皆可線上接案', contactTitle:'還在猶豫適合做哪一種？先聊聊不用錢', contactBody:'告訴我你的店名、服務項目與想法，我會給你最實在的建議。', copyEmail:'複製 Email', sendEmail:'寄信洽談', lineButton:'加 LINE 聊聊', footerLine:'網站與會員服務，讓好生意更容易被看見、被記住。', copiedShort:'已複製', copied:'Email 已複製。', copyFailed:'無法自動複製，請選取上方 Email 複製。', emailHint:'已開啟寄信畫面；若沒有出現，請按「複製 Email」手動寄信。', emailSubject:'網站合作洽談', emailBody:'Alex 你好，\n\n我想洽談網站合作，以下是我的基本資訊：\n\n・店名／品牌：\n・想做的內容（形象網頁、會員系統…）：\n・參考網站（選填）：\n・預算範圍：\n・希望上線時間：\n・方便聯絡的方式（電話／LINE）：\n\n謝謝！'
             },
             en: {
-                pageTitle:'Alex | Websites & Member Systems', metaDescription:'Custom websites and member systems that help businesses in Taiwan attract customers and build loyalty. Based in Taichung, working worldwide.', brand:'Websites & Member Systems', navAudience:'Who I Help', navServices:'Services', navProcess:'How It Works', navPortfolio:'Work', navContact:'Contact',
-                eyebrow:'Based in Taichung · In-person meetings available · Worldwide remote', heroTitle:'Custom Websites That Help Local Businesses Attract Customers and Keep Them Coming Back', heroBody:'From a polished storefront and campaign pages to loyalty programs and easy admin tools, I help turn online visitors into returning customers. Meet in person in Taichung, or work together online from anywhere.', heroCta:'Explore Services', heroContact:'Let’s Talk',
+                pageTitle:'Alex | Websites & Member Systems', brand:'Websites & Member Systems', navAudience:'Who I Help', navServices:'Services', navProcess:'How It Works', navPortfolio:'Work', navContact:'Contact', languageLabel:'Language', menuOpen:'Open menu', menuClose:'Close menu',
+                eyebrow:'Based in Taichung · In-person meetings available · Worldwide remote', heroTitle:'Custom Websites That Help Local Businesses Attract Customers and Keep Them Coming Back', heroBody:'From a polished storefront and campaign pages to loyalty programs and easy admin tools, I help turn online visitors into returning customers.', heroCta:'Explore Services', heroContact:'Let’s Talk',
                 audienceKicker:'Solutions for your business', audienceTitle:'Find the right fit for you', aud1Title:'Restaurants & Local Shops', aud1Body:'Showcase your brand, menu, and promotions with mobile-friendly pages, loyalty tools, and an admin experience you can manage from your phone.', aud2Title:'Personal Brands & Studios', aud2Body:'Bring your story, portfolio, services, and booking form together in one polished place, so clients can find what they need and reach out with confidence.', aud3Title:'Startups & MVP Projects', aud3Body:'Turn an idea into a working web prototype with interactive experiences and connected services, so your team can validate the product and move toward launch.',
-                servicesKicker:'Clear starting prices, tailored to your needs', servicesTitle:'From your online storefront to customer loyalty', plan1Kicker:'PLAN 01', plan1Title:'Brand & Campaign Website', plan1Price:'From NT$ 15,000 (~$500 USD)', plan1For:'For restaurants, local shops, personal brands, campaigns, and portfolios.', plan1Body:'A polished website that works smoothly on phones and computers, with visual layout, menu or product showcases, maps, and one-tap contact or booking. I can help organize your copy if it is not ready yet.', plan1Extra:'Focused on your website experience and brand presentation. Domain and hosting setup, advanced membership features, or admin tools can be scoped as add-ons.', plan2Kicker:'PLAN 02', plan2Title:'Business Website + Member & Admin System', plan2Price:'From NT$ 40,000 (~$1,300 USD)', plan2For:'For businesses that want to grow loyalty, manage bookings or orders, or build a tailored interactive service.', plan2Body:'Includes a multi-page website, custom membership features such as points, coupons, or tiers, and a straightforward admin dashboard you can manage from a phone or tablet.', plan2Extra:'Online payments, LINE notifications, and custom business logic are scoped and quoted based on your workflow.', priceNote:'Starting rates for reference. Final pricing depends on page count and feature complexity. Updates to existing websites are quoted separately.',
-                processKicker:'A clear process from start to launch', processTitle:'How It Works', step1Title:'Share Your Idea', step1Body:'Email me your business, goals, reference websites, and target launch date. In-person meetings are available at your shop or a cafe in Taichung.', step2Title:'Get a Clear Plan & Quote', step2Body:'I’ll recommend an approach that fits your budget and share a clear scope, timeline, and itemized quote. Work starts after you approve the details.', step3Title:'Preview & Launch', step3Body:'Try a preview site during development, share feedback, and refine the experience. Once everything feels right, we launch and I’ll walk you through using it.',
+                servicesKicker:'Clear starting prices, tailored to your needs', servicesTitle:'From your online storefront to customer loyalty', plan1Title:'Brand & Campaign Website', plan1Price:'From NT$ 15,000', plan1PriceUsd:'(~$500 USD)', plan1For:'For restaurants, local shops, personal brands, campaigns, and portfolios.', plan1Body:'A polished website that works smoothly on phones and computers, with visual layout, menu or product showcases, maps, and one-tap contact or booking. I can help organize your copy if it is not ready yet.', plan1Extra:'Focused on your website experience and brand presentation. Domain and hosting setup, advanced membership features, or admin tools can be scoped as add-ons.', plan2Title:'Business Website + Member & Admin System', plan2Price:'From NT$ 40,000', plan2PriceUsd:'(~$1,300 USD)', plan2For:'For businesses that want to grow loyalty, manage bookings or orders, or build a tailored interactive service.', plan2Body:'Includes a multi-page website, custom membership features such as points, coupons, or tiers, and a straightforward admin dashboard you can manage from a phone or tablet.', plan2Extra:'Online payments, LINE notifications, and custom business logic are scoped and quoted based on your workflow.', priceNote:'Starting rates for reference. Final pricing depends on page count and feature complexity. Updates to existing websites are quoted separately.',
+                processKicker:'A clear process from start to launch', processTitle:'How It Works', step1Title:'Share Your Idea', step1Sub:'', step1Body:'Send me an email or a LINE message with your business, goals, reference websites, and target launch date. In-person meetings are available at your shop or a cafe in Taichung.', step2Title:'Get a Clear Plan & Quote', step2Sub:'', step2Body:'I’ll recommend an approach that fits your budget and share a clear scope, timeline, and itemized quote. Work starts after you approve the details.', step3Title:'Preview & Launch', step3Sub:'', step3Body:'Try a preview site during development, share feedback, and refine the experience. Once everything feels right, we launch and I’ll walk you through using it.',
                 portfolioKicker:'Real projects you can try', portfolioTitle:'Selected Work', work1Title:'Gomoku', work1Body:'A browser-based board game visitors can jump into and play right away.', work2Title:'Solitaire', work2Body:'A card game with clear interactions for flipping and dragging cards.', work3Title:'Map & Carousel', work3Body:'Combines a map and image carousel so visitors can browse visuals alongside location details.', viewProject:'View Project',
-                contactKicker:'Taichung in-person · Taiwan and worldwide remote', contactTitle:'Not sure which solution fits best? Let’s have a quick chat.', contactBody:'Tell me about your business and goals, and I’ll share practical recommendations.', copyEmail:'Copy Email', sendEmail:'Email Me', lineButton:'Chat on LINE', serviceArea:'Taichung in-person meetings · Remote projects across Taiwan and worldwide', footerLine:'Thoughtful websites and member tools that help good businesses get noticed and remembered.', copied:'Email copied.', copyFailed:'Could not copy automatically. Please select and copy the email above.'
+                contactKicker:'Taichung in-person · Taiwan and worldwide remote', contactTitle:'Not sure which solution fits best? Let’s have a quick chat.', contactBody:'Tell me about your business and goals, and I’ll share practical recommendations.', copyEmail:'Copy Email', sendEmail:'Email Me', lineButton:'Chat on LINE', footerLine:'Thoughtful websites and member tools that help good businesses get noticed and remembered.', copiedShort:'Copied!', copied:'Email copied.', copyFailed:'Could not copy automatically. Please select and copy the email above.', emailHint:'Opening your email… If nothing appears, use “Copy Email” and send it manually.', emailSubject:'Website Project Inquiry', emailBody:'Hi Alex,\n\nI would like to discuss a website project. Here are some details:\n\n- Business / brand name:\n- What I need (website, member system, etc.):\n- Reference websites (optional):\n- Budget range:\n- Target launch date:\n- Best way to reach me:\n\nThanks!'
+            },
+            ja: {
+                pageTitle:'Alex｜ブランドサイト＆会員システム制作', brand:'ブランドサイト＆会員システム', navAudience:'対象のお客様', navServices:'サービス', navProcess:'ご依頼の流れ', navPortfolio:'制作実績', navContact:'お問い合わせ', languageLabel:'言語', menuOpen:'メニューを開く', menuClose:'メニューを閉じる',
+                eyebrow:'台湾・台中を拠点に活動｜海外からのご依頼もオンラインで対応', heroTitle:'集客とリピーター獲得につながる、オリジナルWebサイトと会員システムを制作します', heroBody:'お店やブランドの紹介ページ、キャンペーンページから、ポイント機能や管理画面まで。難しい技術の知識がなくても大丈夫です。オンラインの訪問者を、長く通ってくれるお客様に変えるお手伝いをします。', heroCta:'サービスを見る', heroContact:'まずは相談する',
+                audienceKicker:'ビジネスに合わせたご提案', audienceTitle:'あなたに合ったサービスを見つける', aud1Title:'飲食店・実店舗', aud1Body:'スマホで見やすいお店のサイト、オンラインメニュー、キャンペーンページを制作。ポイント機能とスマホで操作できる管理画面で、一見のお客様を常連さんに。', aud2Title:'個人ブランド・スタジオ', aud2Body:'経歴、ポートフォリオ、料金表、予約フォームを一つのサイトにまとめます。SNSに散らばった情報を整理し、信頼感と問い合わせ率を高めます。', aud3Title:'スタートアップ・MVP開発', aud3Body:'ビジネスのアイデアを、実際に操作できるWebアプリやプロトタイプとして素早く形に。フロントエンドとバックエンドのAPI連携にも対応し、検証からリリースまでを加速します。',
+                servicesKicker:'料金は明確、内容はご要望に合わせて', servicesTitle:'お店の顔づくりから、リピーター育成まで', plan1Title:'ブランド・キャンペーンサイト', plan1Price:'NT$ 15,000〜', plan1PriceUsd:'（約 500 USD〜）', plan1For:'飲食店、実店舗、個人ブランド、キャンペーン、ポートフォリオ向け。', plan1Body:'スマホでもPCでも快適に見られるサイトを制作します。デザインレイアウト、メニュー・商品紹介、地図、ワンタップでの問い合わせ・予約機能を含みます。原稿が揃っていなくても整理をお手伝いします。', plan1Extra:'このプランはサイトのデザインと見せ方に特化しています。ドメイン・サーバーの設定代行、高度な会員機能、管理画面などはオプションとしてご相談ください。', plan2Title:'ブランドサイト＋会員・管理システム', plan2Price:'NT$ 40,000〜', plan2PriceUsd:'（約 1,300 USD〜）', plan2For:'常連のお客様づくり、予約・注文管理、複数ページの機能やオリジナルシステムが必要な店舗・チーム向け。', plan2Body:'複数ページのサイト制作、ポイント・クーポン・会員ランクなどのオリジナル会員機能、スマホやタブレットで簡単に操作できる管理画面を含みます。', plan2Extra:'オンライン決済、LINE通知連携、独自の業務ロジックなどは、運用内容に合わせて個別にお見積もりします。', priceNote:'上記は参考価格です。最終的な費用はページ数や機能の複雑さによって変わります。既存サイトの部分修正や機能追加は別途お見積もりとなります。',
+                processKicker:'始まりから公開まで、わかりやすく', processTitle:'ご依頼の流れ', step1Title:'ご要望をお聞かせください', step1Sub:'', step1Body:'メールまたはLINEで、事業内容、目標、参考サイト、公開希望時期をお送りください。オンラインでのお打ち合わせも可能です。', step2Title:'ご提案とお見積もり', step2Sub:'', step2Body:'ご予算に合った進め方をご提案し、作業範囲、スケジュール、明細付きのお見積もりをお出しします。内容にご納得いただいてから制作を開始します。', step3Title:'確認して公開', step3Sub:'', step3Body:'制作中はプレビュー用のURLで実際に操作して確認いただけます。ご満足いただけるまで調整し、公開後は使い方もご説明します。',
+                portfolioKicker:'実際に触って試せる制作事例', portfolioTitle:'制作実績', work1Title:'五目並べ', work1Body:'ページを開くだけですぐに対局できるブラウザゲーム。遊び方がすぐわかり、そのまま操作できます。', work2Title:'ソリティア', work2Body:'カードをめくる・ドラッグする操作をわかりやすく実装したトランプゲーム。', work3Title:'地図＋スライダー', work3Body:'地図と画像スライダーを1ページに統合。写真を見ながら場所の情報も確認できます。', viewProject:'作品を見る',
+                contactKicker:'台中では対面も可能｜台湾全土・海外はオンラインで対応', contactTitle:'どのプランが合うか迷ったら、まずはお気軽にご相談ください（無料）', contactBody:'お店やブランド、やりたいことを教えていただければ、実践的なご提案をいたします。', copyEmail:'メールアドレスをコピー', sendEmail:'メールで相談する', lineButton:'LINEで相談する', footerLine:'良いお店やブランドが、見つけてもらい、覚えてもらえるためのWebサイトと会員サービス。', copiedShort:'コピーしました', copied:'メールアドレスをコピーしました。', copyFailed:'自動でコピーできませんでした。上のメールアドレスを選択してコピーしてください。', emailHint:'メール作成画面を開いています。表示されない場合は「メールをコピー」から手動で送信してください。', emailSubject:'Webサイト制作のご相談', emailBody:'Alex様\n\nWebサイト制作についてご相談したく、ご連絡いたしました。\n\n・店名／ブランド名：\n・ご希望の内容（サイト、会員システムなど）：\n・参考サイト（任意）：\n・ご予算：\n・公開希望時期：\n・ご連絡方法：\n\nよろしくお願いいたします。'
+            },
+            de: {
+                pageTitle:'Alex | Websites & Mitgliedersysteme', brand:'Websites & Mitgliedersysteme', navAudience:'Für wen', navServices:'Leistungen', navProcess:'Ablauf', navPortfolio:'Projekte', navContact:'Kontakt', languageLabel:'Sprache', menuOpen:'Menü öffnen', menuClose:'Menü schließen',
+                eyebrow:'Sitz in Taichung, Taiwan · Weltweit remote verfügbar', heroTitle:'Individuelle Websites, die lokalen Unternehmen neue Kunden bringen – und Stammkunden halten', heroBody:'Vom professionellen Webauftritt und Aktionsseiten bis zu Treueprogrammen und einfachen Verwaltungstools: Ich helfe Ihnen, aus Online-Besuchern wiederkehrende Kunden zu machen.', heroCta:'Leistungen ansehen', heroContact:'Unverbindlich anfragen',
+                audienceKicker:'Lösungen für Ihr Geschäft', audienceTitle:'Finden Sie das passende Angebot', aud1Title:'Gastronomie & lokale Geschäfte', aud1Body:'Präsentieren Sie Marke, Speisekarte und Aktionen auf mobilfreundlichen Seiten – mit Treuefunktionen und einem Verwaltungsbereich, den Sie bequem vom Smartphone aus bedienen.', aud2Title:'Personal Brands & Studios', aud2Body:'Werdegang, Portfolio, Leistungen und Buchungsformular an einem professionellen Ort – damit Kunden schnell finden, was sie suchen, und Sie mit gutem Gefühl kontaktieren.', aud3Title:'Start-ups & MVP-Entwicklung', aud3Body:'Verwandeln Sie Ihre Idee in einen funktionierenden Web-Prototyp mit interaktiven Funktionen und angebundenen APIs – so können Sie Ihr Produkt schnell validieren und launchen.',
+                servicesKicker:'Klare Einstiegspreise, individuell geplant', servicesTitle:'Vom Webauftritt bis zur Kundenbindung', plan1Title:'Marken- & Kampagnen-Website', plan1Price:'Ab NT$ 15.000', plan1PriceUsd:'(ca. 500 USD)', plan1For:'Für Restaurants, lokale Geschäfte, Personal Brands, Kampagnen und Portfolios.', plan1Body:'Eine ansprechende Website, die auf Smartphone und Computer reibungslos funktioniert – mit visuellem Layout, Speisekarten- oder Produktpräsentation, Karte und Kontakt bzw. Buchung per Klick. Wenn Ihre Texte noch nicht fertig sind, helfe ich gerne beim Strukturieren.', plan1Extra:'Der Fokus liegt auf Gestaltung und Markenauftritt. Einrichtung von Domain und Hosting, erweiterte Mitgliederfunktionen oder ein Verwaltungsbereich können als Zusatzleistung geplant werden.', plan2Title:'Unternehmenswebsite + Mitglieder- & Verwaltungssystem', plan2Price:'Ab NT$ 40.000', plan2PriceUsd:'(ca. 1.300 USD)', plan2For:'Für Unternehmen, die Kundenbindung aufbauen, Buchungen oder Bestellungen verwalten oder einen individuellen interaktiven Service umsetzen möchten.', plan2Body:'Umfasst eine mehrseitige Website, individuelle Mitgliederfunktionen wie Punkte, Gutscheine oder Stufen sowie ein übersichtliches Dashboard, das Sie per Smartphone oder Tablet bedienen.', plan2Extra:'Online-Zahlungen, LINE-Benachrichtigungen und individuelle Geschäftslogik werden passend zu Ihren Abläufen geplant und separat angeboten.', priceNote:'Einstiegspreise zur Orientierung. Der Endpreis hängt von Seitenanzahl und Funktionsumfang ab. Änderungen an bestehenden Websites werden separat kalkuliert.',
+                processKicker:'Ein klarer Ablauf bis zum Launch', processTitle:'Ablauf', step1Title:'Idee teilen', step1Sub:'', step1Body:'Schreiben Sie mir per E-Mail oder LINE: Ihr Geschäft, Ihre Ziele, Referenz-Websites und den gewünschten Starttermin. Gespräche per Videocall sind jederzeit möglich.', step2Title:'Klares Konzept & Angebot', step2Sub:'', step2Body:'Ich schlage Ihnen einen Ansatz passend zu Ihrem Budget vor – mit klarem Leistungsumfang, Zeitplan und detailliertem Angebot. Die Arbeit beginnt erst nach Ihrer Freigabe.', step3Title:'Vorschau & Launch', step3Sub:'', step3Body:'Während der Entwicklung testen Sie eine Vorschauversion, geben Feedback und wir verfeinern gemeinsam. Wenn alles passt, geht die Seite online und ich zeige Ihnen die Bedienung.',
+                portfolioKicker:'Echte Projekte zum Ausprobieren', portfolioTitle:'Ausgewählte Projekte', work1Title:'Gomoku', work1Body:'Ein Brettspiel im Browser, das Besucher sofort verstehen und direkt spielen können.', work2Title:'Solitär', work2Body:'Ein Kartenspiel mit klaren Interaktionen zum Aufdecken und Ziehen der Karten.', work3Title:'Karte & Bildkarussell', work3Body:'Kombiniert Karte und Bildkarussell auf einer Seite – Besucher sehen Bilder und Standortinfos zugleich.', viewProject:'Projekt ansehen',
+                contactKicker:'Persönlich in Taichung · Taiwan und weltweit remote', contactTitle:'Unsicher, welche Lösung passt? Sprechen wir kurz darüber – kostenlos.', contactBody:'Erzählen Sie mir von Ihrem Unternehmen und Ihren Zielen – ich gebe Ihnen praxisnahe Empfehlungen.', copyEmail:'E-Mail kopieren', sendEmail:'E-Mail senden', lineButton:'Auf LINE schreiben', footerLine:'Durchdachte Websites und Mitgliedertools, damit gute Unternehmen gesehen und in Erinnerung behalten werden.', copiedShort:'Kopiert!', copied:'E-Mail-Adresse kopiert.', copyFailed:'Automatisches Kopieren nicht möglich. Bitte markieren und kopieren Sie die E-Mail-Adresse oben.', emailHint:'Ihr E-Mail-Programm wird geöffnet … Falls nichts erscheint, kopieren Sie die Adresse und senden Sie die Nachricht manuell.', emailSubject:'Anfrage Website-Projekt', emailBody:'Hallo Alex,\n\nich interessiere mich für ein Website-Projekt. Hier einige Eckdaten:\n\n- Unternehmen / Marke:\n- Was ich brauche (Website, Mitgliedersystem usw.):\n- Referenz-Websites (optional):\n- Budgetrahmen:\n- Gewünschter Starttermin:\n- Beste Kontaktmöglichkeit:\n\nVielen Dank!'
+            },
+            fr: {
+                pageTitle:'Alex | Sites web & systèmes membres', brand:'Sites web & systèmes membres', navAudience:'Pour qui', navServices:'Services', navProcess:'Déroulement', navPortfolio:'Réalisations', navContact:'Contact', languageLabel:'Langue', menuOpen:'Ouvrir le menu', menuClose:'Fermer le menu',
+                eyebrow:'Basé à Taichung, Taïwan · Missions à distance dans le monde entier', heroTitle:'Des sites web sur mesure qui attirent de nouveaux clients et les font revenir', heroBody:'D’une vitrine en ligne soignée et de pages promotionnelles jusqu’aux programmes de fidélité et outils d’administration simples, je vous aide à transformer vos visiteurs en clients fidèles.', heroCta:'Découvrir les services', heroContact:'Parlons-en',
+                audienceKicker:'Des solutions adaptées à votre activité', audienceTitle:'Trouvez la formule qui vous correspond', aud1Title:'Restaurants & commerces de proximité', aud1Body:'Mettez en valeur votre marque, votre carte et vos promotions avec des pages adaptées au mobile, des outils de fidélité et une interface d’administration utilisable depuis votre téléphone.', aud2Title:'Marques personnelles & studios', aud2Body:'Réunissez votre parcours, votre portfolio, vos tarifs et un formulaire de réservation en un seul endroit professionnel, pour que vos clients trouvent l’essentiel et vous contactent en confiance.', aud3Title:'Startups & développement de MVP', aud3Body:'Transformez une idée en prototype web fonctionnel, avec des interactions et des API connectées, pour valider votre produit et avancer vers le lancement.',
+                servicesKicker:'Des tarifs de départ clairs, adaptés à vos besoins', servicesTitle:'De votre vitrine en ligne à la fidélisation', plan1Title:'Site vitrine & campagne', plan1Price:'À partir de NT$ 15 000', plan1PriceUsd:'(env. 500 USD)', plan1For:'Pour restaurants, commerces, marques personnelles, campagnes et portfolios.', plan1Body:'Un site soigné et fluide sur mobile comme sur ordinateur : mise en page, présentation de la carte ou des produits, plan d’accès et contact ou réservation en un clic. Je peux aussi vous aider à structurer vos textes.', plan1Extra:'Cette formule se concentre sur l’interface et l’image de marque. La configuration du domaine et de l’hébergement, les fonctions membres avancées ou un espace d’administration peuvent être ajoutés en option.', plan2Title:'Site d’entreprise + système membres & administration', plan2Price:'À partir de NT$ 40 000', plan2PriceUsd:'(env. 1 300 USD)', plan2For:'Pour les entreprises qui veulent fidéliser leur clientèle, gérer réservations ou commandes, ou créer un service interactif sur mesure.', plan2Body:'Comprend un site multipage, des fonctions membres personnalisées (points, coupons, niveaux) et un tableau de bord simple à gérer depuis un téléphone ou une tablette.', plan2Extra:'Paiement en ligne, notifications LINE et logique métier spécifique sont étudiés et chiffrés selon votre fonctionnement.', priceNote:'Tarifs de départ indicatifs. Le prix final dépend du nombre de pages et de la complexité des fonctionnalités. Les modifications de sites existants font l’objet d’un devis séparé.',
+                processKicker:'Un processus clair jusqu’au lancement', processTitle:'Déroulement', step1Title:'Partagez votre idée', step1Sub:'', step1Body:'Envoyez-moi un e-mail ou un message LINE avec votre activité, vos objectifs, des sites de référence et la date de lancement souhaitée. Les échanges en visio sont tout à fait possibles.', step2Title:'Proposition & devis clairs', step2Sub:'', step2Body:'Je vous propose une approche adaptée à votre budget, avec un périmètre, un calendrier et un devis détaillé. Le travail commence après votre validation.', step3Title:'Aperçu & mise en ligne', step3Sub:'', step3Body:'Pendant le développement, testez une version de prévisualisation, donnez votre avis et nous peaufinons ensemble. Une fois tout validé, le site est mis en ligne et je vous montre comment l’utiliser.',
+                portfolioKicker:'De vrais projets à essayer', portfolioTitle:'Réalisations', work1Title:'Gomoku', work1Body:'Un jeu de plateau dans le navigateur, compréhensible et jouable immédiatement.', work2Title:'Solitaire', work2Body:'Un jeu de cartes aux interactions claires pour retourner et déplacer les cartes.', work3Title:'Carte & carrousel', work3Body:'Associe une carte et un carrousel d’images sur une même page pour parcourir les visuels avec les infos de lieu.', viewProject:'Voir le projet',
+                contactKicker:'Rendez-vous possible à Taichung · Taïwan et monde entier à distance', contactTitle:'Vous hésitez sur la formule ? Échangeons rapidement, c’est gratuit.', contactBody:'Parlez-moi de votre activité et de vos objectifs, je vous ferai des recommandations concrètes.', copyEmail:'Copier l’e-mail', sendEmail:'M’écrire', lineButton:'Discuter sur LINE', footerLine:'Des sites web et outils de fidélité pensés pour que les belles entreprises soient vues et retenues.', copiedShort:'Copié !', copied:'E-mail copié.', copyFailed:'Copie automatique impossible. Veuillez sélectionner et copier l’adresse ci-dessus.', emailHint:'Ouverture de votre messagerie… Si rien ne s’affiche, copiez l’adresse et envoyez le message manuellement.', emailSubject:'Demande de projet de site web', emailBody:'Bonjour Alex,\n\nJe souhaiterais discuter d’un projet de site web. Voici quelques informations :\n\n- Entreprise / marque :\n- Besoin (site, système membres, etc.) :\n- Sites de référence (facultatif) :\n- Budget :\n- Date de lancement souhaitée :\n- Meilleur moyen de me contacter :\n\nMerci !'
+            },
+            'zh-CN': {
+                pageTitle:'Alex｜品牌网站与会员系统', brand:'品牌网站与会员系统', navAudience:'服务对象', navServices:'服务方案', navProcess:'合作流程', navPortfolio:'作品', navContact:'联系', languageLabel:'语言', menuOpen:'打开菜单', menuClose:'关闭菜单',
+                eyebrow:'立足台湾台中｜可当面沟通・海内外均可线上合作', heroTitle:'帮品牌与实体好店，打造能引流、留住回头客的专属网站与会员系统', heroBody:'不用懂复杂的技术，从门店形象网页、活动宣传，到会员积分与后台管理，帮你把线上访客变成长期复购的老顾客。', heroCta:'查看服务方案', heroContact:'先聊聊需求',
+                audienceKicker:'从你的经营场景出发', audienceTitle:'看看哪种服务最适合你', aud1Title:'餐饮与实体门店', aud1Body:'打造专业的线上门面、在线菜单与活动宣传页，搭配会员积分和手机即可操作的管理后台，把过路客变成回头客。', aud2Title:'个人品牌与工作室', aud2Body:'整合个人经历、作品集、服务价目与一键预约表单，告别社交媒体信息零散的困扰，提升专业度与咨询转化率。', aud3Title:'创业项目与 MVP 开发', aud3Body:'快速把商业想法变成可实际操作的交互网页与系统原型，支持前后端 API 对接与清晰架构，加速产品验证与上线。',
+                servicesKicker:'价格透明，内容按需规划', servicesTitle:'从品牌门面到老客经营', plan1Title:'形象与活动网页', plan1Price:'NT$ 15,000 起', plan1PriceUsd:'（约 500 美元起）', plan1For:'适合：餐厅门店、个人品牌、活动宣传或作品展示。', plan1Body:'打造在手机和电脑上都流畅好看的专属门面，包含视觉排版、菜单或商品展示、地图导航与一键联系／预约功能。没有完整文案也可以协助整理。', plan1Extra:'本方案聚焦前端界面与形象呈现；如需代办域名与服务器、进阶会员功能或管理后台，可按实际需求规划加购。', plan2Title:'品牌官网＋会员／后台系统', plan2Price:'NT$ 40,000 起', plan2PriceUsd:'（约 1,300 美元起）', plan2For:'适合：想经营老客户会员、管理订单与预约，或需要多页面交互与定制系统的商家与团队。', plan2Body:'包含多页面网站开发、定制会员功能（积分、优惠券或会员等级）以及简单直观的管理后台，老板用手机或平板就能轻松管理。', plan2Extra:'如需在线支付、LINE 通知对接或特殊业务逻辑，将根据实际运营需求提供完整评估与报价。', priceNote:'以上为个人接单的参考起步价，实际费用会根据页面数量与功能复杂度调整；现有网站的局部修改或功能追加另行报价。',
+                processKicker:'每一步都清晰可控', processTitle:'合作流程', step1Title:'聊聊需求', step1Sub:'/ Share Your Idea', step1Body:'发邮件或加 LINE 告诉我你的业务内容、想达成的目标、参考网站和预计上线时间。也可以通过线上视频会议沟通。', step2Title:'获取建议与报价', step2Sub:'/ Clear Proposal & Quote', step2Body:'我会根据你的预算规划最合适的方案，提供清晰的项目清单、交付时间与报价明细。双方确认无误后再开始制作。', step3Title:'试用与上线', step3Sub:'/ Preview & Launch', step3Body:'制作期间会提供可预览的测试网址让你实际操作，确认页面与后台好上手、调整到满意后正式上线，并提供使用教学。',
+                portfolioKicker:'真实项目，欢迎打开体验', portfolioTitle:'作品展示', work1Title:'五子棋', work1Body:'打开网页就能开始对弈，让访客快速理解玩法并直接互动。', work2Title:'扑克牌接龙', work2Body:'支持翻牌与拖拽操作，呈现清晰直观的交互流程。', work3Title:'地图轮播', work3Body:'把地图与图片轮播整合在同一页，方便访客一边浏览、一边了解地点信息。', viewProject:'打开作品',
+                contactKicker:'台中可当面沟通｜台湾全境与海外均可线上合作', contactTitle:'还在犹豫哪种方案适合你？先聊聊，免费咨询', contactBody:'告诉我你的店名、服务项目和想法，我会给你最实在的建议。', copyEmail:'复制邮箱', sendEmail:'发邮件咨询', lineButton:'加 LINE 聊聊', footerLine:'网站与会员服务，让好生意更容易被看见、被记住。', copiedShort:'已复制', copied:'邮箱已复制。', copyFailed:'无法自动复制，请手动选中上方邮箱复制。', emailHint:'已打开写信页面；若没有出现，请点击“复制 Email”手动发信。', emailSubject:'网站合作咨询', emailBody:'Alex 你好，\n\n我想咨询网站合作，以下是我的基本信息：\n\n・店名／品牌：\n・想做的内容（形象网页、会员系统等）：\n・参考网站（选填）：\n・预算范围：\n・希望上线时间：\n・方便的联系方式（电话／微信／LINE）：\n\n谢谢！'
+            },
+            ko: {
+                pageTitle:'Alex | 브랜드 웹사이트 & 회원 시스템', brand:'브랜드 웹사이트 & 회원 시스템', navAudience:'서비스 대상', navServices:'서비스', navProcess:'진행 방식', navPortfolio:'포트폴리오', navContact:'문의', languageLabel:'언어', menuOpen:'메뉴 열기', menuClose:'메뉴 닫기',
+                eyebrow:'대만 타이중 기반 · 해외 프로젝트 온라인 진행 가능', heroTitle:'손님을 모으고 단골로 만드는 맞춤형 웹사이트와 회원 시스템을 만듭니다', heroBody:'복잡한 기술을 몰라도 괜찮습니다. 매장 홍보 페이지와 이벤트 페이지부터 포인트 적립, 관리자 페이지까지, 온라인 방문자를 꾸준히 다시 찾는 단골 고객으로 바꿔 드립니다.', heroCta:'서비스 보기', heroContact:'상담 문의하기',
+                audienceKicker:'비즈니스 상황에 맞춘 솔루션', audienceTitle:'나에게 맞는 서비스 찾기', aud1Title:'요식업 & 오프라인 매장', aud1Body:'모바일에 최적화된 매장 홈페이지, 온라인 메뉴, 이벤트 페이지에 포인트 적립과 스마트폰으로 관리하는 관리자 페이지를 더해, 지나가던 손님을 단골로 만듭니다.', aud2Title:'퍼스널 브랜드 & 스튜디오', aud2Body:'경력, 포트폴리오, 서비스 가격표, 예약 폼을 한곳에 정리해 SNS에 흩어진 정보를 모으고, 전문성과 문의 전환율을 높입니다.', aud3Title:'스타트업 & MVP 개발', aud3Body:'사업 아이디어를 실제로 작동하는 웹 프로토타입으로 빠르게 구현합니다. 프론트엔드·백엔드 API 연동과 명확한 구조로 제품 검증과 출시를 앞당깁니다.',
+                servicesKicker:'명확한 가격, 요구사항에 맞춘 구성', servicesTitle:'브랜드 얼굴부터 단골 관리까지', plan1Title:'브랜드 & 이벤트 웹사이트', plan1Price:'NT$ 15,000부터', plan1PriceUsd:'(약 500 USD부터)', plan1For:'레스토랑, 매장, 퍼스널 브랜드, 이벤트 홍보, 포트폴리오에 적합합니다.', plan1Body:'모바일과 PC 모두에서 매끄럽게 보이는 웹사이트를 제작합니다. 디자인 레이아웃, 메뉴·상품 소개, 지도, 원터치 문의·예약 기능이 포함됩니다. 원고가 준비되지 않았어도 정리를 도와드립니다.', plan1Extra:'이 플랜은 화면 디자인과 브랜드 이미지에 집중합니다. 도메인·호스팅 설정 대행, 고급 회원 기능, 관리자 페이지는 필요에 따라 추가할 수 있습니다.', plan2Title:'브랜드 웹사이트 + 회원·관리자 시스템', plan2Price:'NT$ 40,000부터', plan2PriceUsd:'(약 1,300 USD부터)', plan2For:'단골 회원 관리, 예약·주문 관리, 여러 페이지의 인터랙션이나 맞춤형 시스템이 필요한 매장과 팀에 적합합니다.', plan2Body:'여러 페이지로 구성된 웹사이트, 포인트·쿠폰·등급 등 맞춤형 회원 기능, 스마트폰이나 태블릿으로 쉽게 관리할 수 있는 관리자 페이지가 포함됩니다.', plan2Extra:'온라인 결제, LINE 알림 연동, 특수한 비즈니스 로직은 실제 운영 방식에 맞춰 별도로 검토 후 견적을 드립니다.', priceNote:'위 가격은 참고용 시작 가격입니다. 최종 비용은 페이지 수와 기능의 복잡도에 따라 달라지며, 기존 웹사이트의 부분 수정이나 기능 추가는 별도 견적입니다.',
+                processKicker:'시작부터 오픈까지 명확하게', processTitle:'진행 방식', step1Title:'요구사항 공유', step1Sub:'', step1Body:'이메일이나 LINE으로 사업 내용, 목표, 참고 사이트, 희망 오픈 일정을 알려 주세요. 화상 미팅도 가능합니다.', step2Title:'제안 및 견적', step2Sub:'', step2Body:'예산에 맞는 방법을 제안하고, 작업 범위·일정·상세 견적을 명확하게 안내해 드립니다. 확인하신 후에 작업을 시작합니다.', step3Title:'미리보기 & 오픈', step3Sub:'', step3Body:'제작 기간 동안 미리보기 주소로 직접 사용해 보실 수 있습니다. 만족하실 때까지 다듬은 후 정식 오픈하고 사용법도 안내해 드립니다.',
+                portfolioKicker:'직접 체험해 볼 수 있는 실제 작업물', portfolioTitle:'포트폴리오', work1Title:'오목', work1Body:'페이지를 열자마자 바로 대국할 수 있는 브라우저 게임으로, 방문자가 규칙을 빠르게 이해하고 바로 즐길 수 있습니다.', work2Title:'솔리테어', work2Body:'카드 뒤집기와 드래그 조작을 직관적으로 구현한 카드 게임입니다.', work3Title:'지도 & 캐러셀', work3Body:'지도와 이미지 캐러셀을 한 페이지에 결합해, 사진을 보면서 위치 정보도 함께 확인할 수 있습니다.', viewProject:'작품 보기',
+                contactKicker:'타이중 대면 상담 가능 · 대만 전역 및 해외 온라인 진행', contactTitle:'어떤 서비스가 맞을지 고민되시나요? 무료로 먼저 상담해 보세요', contactBody:'매장이나 브랜드, 원하시는 내용을 알려 주시면 현실적인 조언을 드리겠습니다.', copyEmail:'이메일 복사', sendEmail:'이메일 보내기', lineButton:'LINE으로 상담하기', footerLine:'좋은 비즈니스가 더 쉽게 발견되고 기억되도록 돕는 웹사이트와 회원 서비스.', copiedShort:'복사됨', copied:'이메일이 복사되었습니다.', copyFailed:'자동으로 복사할 수 없습니다. 위의 이메일 주소를 선택해 복사해 주세요.', emailHint:'메일 작성 화면을 여는 중입니다. 나타나지 않으면 이메일 주소를 복사해 직접 보내 주세요.', emailSubject:'웹사이트 제작 문의', emailBody:'안녕하세요 Alex 님,\n\n웹사이트 제작에 대해 상담하고 싶습니다. 기본 정보는 다음과 같습니다.\n\n- 상호 / 브랜드명:\n- 원하는 작업 (웹사이트, 회원 시스템 등):\n- 참고 사이트 (선택):\n- 예산 범위:\n- 희망 오픈 일정:\n- 연락 방법:\n\n감사합니다!'
+            },
+            ar: {
+                pageTitle:'Alex | مواقع إلكترونية وأنظمة عضوية', brand:'مواقع إلكترونية وأنظمة عضوية', navAudience:'لمن الخدمة', navServices:'الخدمات', navProcess:'آلية العمل', navPortfolio:'الأعمال', navContact:'تواصل', languageLabel:'اللغة', menuOpen:'فتح القائمة', menuClose:'إغلاق القائمة',
+                eyebrow:'مقيم في تايتشونغ، تايوان · أعمل عن بُعد مع عملاء حول العالم', heroTitle:'مواقع إلكترونية مخصصة تساعد الأعمال المحلية على جذب العملاء والحفاظ على ولائهم', heroBody:'من واجهة إلكترونية احترافية وصفحات العروض إلى برامج الولاء وأدوات إدارة سهلة، أساعدك على تحويل زوار موقعك إلى عملاء دائمين.', heroCta:'استعرض الخدمات', heroContact:'لنتحدث',
+                audienceKicker:'حلول تناسب نشاطك التجاري', audienceTitle:'اختر ما يناسبك', aud1Title:'المطاعم والمتاجر المحلية', aud1Body:'اعرض علامتك التجارية وقائمة الطعام والعروض في صفحات متوافقة مع الجوال، مع أدوات ولاء ولوحة إدارة يمكنك التحكم بها من هاتفك.', aud2Title:'العلامات الشخصية والاستوديوهات', aud2Body:'اجمع سيرتك وأعمالك وأسعار خدماتك ونموذج الحجز في مكان واحد احترافي، ليجد العملاء ما يحتاجونه ويتواصلوا معك بثقة.', aud3Title:'الشركات الناشئة وتطوير MVP', aud3Body:'حوّل فكرتك إلى نموذج أولي يعمل فعليًا على الويب، مع تجارب تفاعلية وربط بواجهات API، لتختبر منتجك وتنطلق بسرعة.',
+                servicesKicker:'أسعار بداية واضحة، مصممة حسب احتياجك', servicesTitle:'من واجهتك الإلكترونية إلى ولاء العملاء', plan1Title:'موقع تعريفي وحملات', plan1Price:'ابتداءً من 15,000 دولار تايواني', plan1PriceUsd:'(حوالي 500 دولار أمريكي)', plan1For:'مناسب للمطاعم والمتاجر والعلامات الشخصية والحملات الترويجية ومعارض الأعمال.', plan1Body:'موقع أنيق يعمل بسلاسة على الهاتف والكمبيوتر، يشمل التصميم وعرض القائمة أو المنتجات والخريطة وزر التواصل أو الحجز بلمسة واحدة. يمكنني مساعدتك في تنظيم المحتوى إن لم يكن جاهزًا.', plan1Extra:'تركز هذه الباقة على واجهة الموقع وصورة العلامة التجارية. يمكن إضافة إعداد النطاق والاستضافة أو ميزات العضوية المتقدمة أو لوحة الإدارة حسب الحاجة.', plan2Title:'موقع الشركة + نظام العضوية والإدارة', plan2Price:'ابتداءً من 40,000 دولار تايواني', plan2PriceUsd:'(حوالي 1,300 دولار أمريكي)', plan2For:'مناسب للأعمال التي تريد بناء ولاء العملاء أو إدارة الحجوزات والطلبات أو تقديم خدمة تفاعلية مخصصة.', plan2Body:'يشمل موقعًا متعدد الصفحات، وميزات عضوية مخصصة مثل النقاط والقسائم والمستويات، ولوحة تحكم بسيطة يمكنك إدارتها من الهاتف أو الجهاز اللوحي.', plan2Extra:'يتم تقييم الدفع الإلكتروني وإشعارات LINE ومنطق العمل الخاص وتسعيرها وفقًا لطريقة عملك.', priceNote:'الأسعار أعلاه أسعار بداية للاسترشاد. يعتمد السعر النهائي على عدد الصفحات ومدى تعقيد الميزات، وتُسعَّر تعديلات المواقع الحالية بشكل منفصل.',
+                processKicker:'خطوات واضحة من البداية حتى الإطلاق', processTitle:'آلية العمل', step1Title:'شاركني فكرتك', step1Sub:'', step1Body:'أرسل لي بريدًا إلكترونيًا أو رسالة على LINE تتضمن نشاطك وأهدافك ومواقع مرجعية وموعد الإطلاق المطلوب. يمكننا أيضًا الاجتماع عبر مكالمة فيديو.', step2Title:'خطة وعرض سعر واضحان', step2Sub:'', step2Body:'سأقترح نهجًا يناسب ميزانيتك مع نطاق عمل وجدول زمني وعرض سعر مفصل. يبدأ العمل بعد موافقتك.', step3Title:'المعاينة والإطلاق', step3Sub:'', step3Body:'خلال التطوير يمكنك تجربة نسخة معاينة وإبداء ملاحظاتك لنحسّنها معًا. وعندما يصبح كل شيء جاهزًا نطلق الموقع وأشرح لك طريقة استخدامه.',
+                portfolioKicker:'مشاريع حقيقية يمكنك تجربتها', portfolioTitle:'أعمال مختارة', work1Title:'غوموكو', work1Body:'لعبة لوحية في المتصفح يمكن للزوار فهمها واللعب بها فورًا.', work2Title:'سوليتير', work2Body:'لعبة ورق بتفاعلات واضحة لقلب البطاقات وسحبها.', work3Title:'خريطة وعرض صور', work3Body:'يجمع بين الخريطة وعرض الصور المتحرك في صفحة واحدة، ليتصفح الزوار الصور مع معلومات الموقع.', viewProject:'عرض المشروع',
+                contactKicker:'لقاء شخصي في تايتشونغ · عن بُعد في تايوان وحول العالم', contactTitle:'لست متأكدًا أي حل يناسبك؟ لنتحدث قليلًا، الاستشارة مجانية.', contactBody:'أخبرني عن نشاطك وأهدافك، وسأقدم لك توصيات عملية.', copyEmail:'نسخ البريد الإلكتروني', sendEmail:'راسلني', lineButton:'تواصل عبر LINE', footerLine:'مواقع وأدوات عضوية مدروسة تساعد الأعمال الجيدة على أن تُرى وتُذكر.', copiedShort:'تم النسخ', copied:'تم نسخ البريد الإلكتروني.', copyFailed:'تعذر النسخ تلقائيًا. يرجى تحديد البريد الإلكتروني أعلاه ونسخه.', emailHint:'جارٍ فتح البريد الإلكتروني… إذا لم يظهر شيء، انسخ العنوان وأرسل الرسالة يدويًا.', emailSubject:'استفسار عن مشروع موقع إلكتروني', emailBody:'مرحبًا Alex،\n\nأود مناقشة مشروع موقع إلكتروني. إليك بعض التفاصيل:\n\n- اسم النشاط / العلامة التجارية:\n- ما أحتاجه (موقع، نظام عضوية، إلخ):\n- مواقع مرجعية (اختياري):\n- الميزانية:\n- موعد الإطلاق المطلوب:\n- أفضل وسيلة للتواصل:\n\nشكرًا!'
+            },
+            es: {
+                pageTitle:'Alex | Sitios web y sistemas de membresía', brand:'Sitios web y sistemas de membresía', navAudience:'Para quién', navServices:'Servicios', navProcess:'Cómo trabajamos', navPortfolio:'Proyectos', navContact:'Contacto', languageLabel:'Idioma', menuOpen:'Abrir menú', menuClose:'Cerrar menú',
+                eyebrow:'Con base en Taichung, Taiwán · Trabajo remoto para todo el mundo', heroTitle:'Sitios web a medida que ayudan a los negocios locales a atraer clientes y fidelizarlos', heroBody:'Desde una vitrina en línea profesional y páginas de promociones hasta programas de fidelización y herramientas de gestión sencillas, le ayudo a convertir visitantes en clientes recurrentes.', heroCta:'Ver servicios', heroContact:'Hablemos',
+                audienceKicker:'Soluciones para su negocio', audienceTitle:'Encuentre la opción ideal para usted', aud1Title:'Restaurantes y comercios locales', aud1Body:'Muestre su marca, menú y promociones con páginas adaptadas al móvil, herramientas de fidelización y un panel de administración que puede manejar desde su teléfono.', aud2Title:'Marcas personales y estudios', aud2Body:'Reúna su trayectoria, portafolio, tarifas y formulario de reservas en un solo lugar profesional, para que sus clientes encuentren lo que buscan y le contacten con confianza.', aud3Title:'Startups y desarrollo de MVP', aud3Body:'Convierta una idea en un prototipo web funcional, con experiencias interactivas y APIs conectadas, para validar su producto y avanzar hacia el lanzamiento.',
+                servicesKicker:'Precios iniciales claros, adaptados a sus necesidades', servicesTitle:'De su vitrina en línea a la fidelización de clientes', plan1Title:'Sitio web de marca y campañas', plan1Price:'Desde NT$ 15.000', plan1PriceUsd:'(aprox. 500 USD)', plan1For:'Para restaurantes, comercios locales, marcas personales, campañas y portafolios.', plan1Body:'Un sitio web cuidado que funciona sin problemas en móvil y computadora, con diseño visual, presentación del menú o productos, mapa y contacto o reserva con un solo toque. Si aún no tiene los textos listos, puedo ayudarle a organizarlos.', plan1Extra:'Este plan se centra en la experiencia del sitio y la imagen de marca. La configuración de dominio y hosting, funciones avanzadas de membresía o herramientas de administración pueden añadirse como extras.', plan2Title:'Sitio web empresarial + sistema de membresía y administración', plan2Price:'Desde NT$ 40.000', plan2PriceUsd:'(aprox. 1.300 USD)', plan2For:'Para negocios que quieren fidelizar clientes, gestionar reservas o pedidos, o crear un servicio interactivo a medida.', plan2Body:'Incluye un sitio web de varias páginas, funciones de membresía personalizadas como puntos, cupones o niveles, y un panel de administración sencillo que puede manejar desde un teléfono o tableta.', plan2Extra:'Los pagos en línea, las notificaciones por LINE y la lógica de negocio personalizada se evalúan y cotizan según su forma de trabajar.', priceNote:'Precios iniciales de referencia. El precio final depende del número de páginas y la complejidad de las funciones. Las modificaciones a sitios existentes se cotizan por separado.',
+                processKicker:'Un proceso claro de principio a fin', processTitle:'Cómo trabajamos', step1Title:'Cuénteme su idea', step1Sub:'', step1Body:'Envíeme un correo o un mensaje por LINE con su negocio, objetivos, sitios de referencia y fecha de lanzamiento deseada. También podemos reunirnos por videollamada.', step2Title:'Propuesta y presupuesto claros', step2Sub:'', step2Body:'Le recomendaré un enfoque que se ajuste a su presupuesto, con alcance, plazos y un presupuesto detallado. El trabajo comienza cuando usted aprueba los detalles.', step3Title:'Vista previa y lanzamiento', step3Sub:'', step3Body:'Durante el desarrollo podrá probar una versión de vista previa, dar su opinión y pulir juntos la experiencia. Cuando todo esté listo, lanzamos el sitio y le enseño a usarlo.',
+                portfolioKicker:'Proyectos reales que puede probar', portfolioTitle:'Proyectos destacados', work1Title:'Gomoku', work1Body:'Un juego de mesa en el navegador que los visitantes pueden entender y jugar al instante.', work2Title:'Solitario', work2Body:'Un juego de cartas con interacciones claras para voltear y arrastrar cartas.', work3Title:'Mapa y carrusel', work3Body:'Combina un mapa y un carrusel de imágenes en una sola página para ver fotos junto con la información de ubicación.', viewProject:'Ver proyecto',
+                contactKicker:'Reuniones presenciales en Taichung · Remoto en Taiwán y todo el mundo', contactTitle:'¿No sabe qué opción le conviene? Hablemos, la consulta es gratuita.', contactBody:'Cuénteme sobre su negocio y sus objetivos, y le daré recomendaciones prácticas.', copyEmail:'Copiar correo', sendEmail:'Enviar correo', lineButton:'Escribir por LINE', footerLine:'Sitios web y herramientas de membresía pensados para que los buenos negocios sean vistos y recordados.', copiedShort:'¡Copiado!', copied:'Correo copiado.', copyFailed:'No se pudo copiar automáticamente. Seleccione y copie el correo de arriba.', emailHint:'Abriendo su correo… Si no aparece nada, copie la dirección y envíe el mensaje manualmente.', emailSubject:'Consulta sobre proyecto web', emailBody:'Hola, Alex:\n\nMe gustaría hablar sobre un proyecto de sitio web. Estos son algunos detalles:\n\n- Negocio / marca:\n- Lo que necesito (sitio web, sistema de membresía, etc.):\n- Sitios de referencia (opcional):\n- Presupuesto:\n- Fecha de lanzamiento deseada:\n- Mejor forma de contactarme:\n\n¡Gracias!'
             }
         };
-        const languageButtons = document.querySelectorAll('[data-language]');
-        function setLanguage(language) {
-            const selected = translations[language] ? language : 'zh';
-            document.documentElement.lang = selected === 'zh' ? 'zh-TW' : 'en';
+        // 語言選單順序：繁中（母語市場）第一、英文第二、簡中第三，其餘依接案市場價值由高到低排列
+        const languages = [
+            { code:'zh-TW', label:'繁體中文' },
+            { code:'en', label:'English' },
+            { code:'zh-CN', label:'简体中文' },
+            { code:'ja', label:'日本語' },
+            { code:'de', label:'Deutsch' },
+            { code:'fr', label:'Français' },
+            { code:'ko', label:'한국어' },
+            { code:'ar', label:'العربية' },
+            { code:'es', label:'Español' }
+        ];
+        const DEFAULT_LANGUAGE = 'zh-TW';
+        const RTL_LANGUAGES = ['ar'];
+        // Noto Sans TC 已在 <head> 載入；其他文字系統的字型在切換到該語言時才載入
+        const languageFonts = { ja:'Noto+Sans+JP', 'zh-CN':'Noto+Sans+SC', ko:'Noto+Sans+KR', ar:'Noto+Sans+Arabic' };
+        // 只記錄使用者「手動」選的語言；沒手動選過的訪客每次都依瀏覽器語言自動偵測
+        const STORAGE_KEY = 'site-language-choice';
+        let activeLanguage = DEFAULT_LANGUAGE;
+
+        // 自製語言選單：清單有最大高度，超過可上下捲動
+        const languagePickers = [...document.querySelectorAll('[data-lang-picker]')];
+        languagePickers.forEach(picker => {
+            const list = picker.querySelector('.lang-list');
+            languages.forEach(({ code, label }) => {
+                const item = document.createElement('li');
+                item.className = 'lang-option'; item.setAttribute('role', 'option'); item.tabIndex = -1;
+                item.dataset.value = code; item.lang = code; item.textContent = label;
+                list.appendChild(item);
+            });
+        });
+        function closePicker(picker, focusTrigger = false) {
+            const trigger = picker.querySelector('.lang-trigger');
+            picker.querySelector('.lang-list').hidden = true;
+            trigger.setAttribute('aria-expanded', 'false');
+            if (focusTrigger) trigger.focus();
+        }
+        function openPicker(picker) {
+            languagePickers.forEach(other => { if (other !== picker) closePicker(other); });
+            const list = picker.querySelector('.lang-list');
+            list.hidden = false;
+            picker.querySelector('.lang-trigger').setAttribute('aria-expanded', 'true');
+            const current = list.querySelector('[aria-selected="true"]') || list.firstElementChild;
+            current.focus({ preventScroll: true });
+            current.scrollIntoView({ block: 'nearest' });
+        }
+        languagePickers.forEach(picker => {
+            const trigger = picker.querySelector('.lang-trigger');
+            const list = picker.querySelector('.lang-list');
+            trigger.addEventListener('click', () => list.hidden ? openPicker(picker) : closePicker(picker));
+            trigger.addEventListener('keydown', event => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); openPicker(picker); }
+            });
+            list.addEventListener('click', event => {
+                const item = event.target.closest('.lang-option');
+                if (!item) return;
+                setLanguage(item.dataset.value, true);
+                closePicker(picker, true);
+            });
+            list.addEventListener('keydown', event => {
+                const items = [...list.children];
+                const index = items.indexOf(document.activeElement);
+                const move = to => { event.preventDefault(); const item = items[Math.max(0, Math.min(items.length - 1, to))]; item.focus({ preventScroll: true }); item.scrollIntoView({ block: 'nearest' }); };
+                if (event.key === 'ArrowDown') move(index + 1);
+                else if (event.key === 'ArrowUp') move(index - 1);
+                else if (event.key === 'Home') move(0);
+                else if (event.key === 'End') move(items.length - 1);
+                else if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (index >= 0) { setLanguage(items[index].dataset.value, true); closePicker(picker, true); } }
+                else if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); closePicker(picker, true); }
+                else if (event.key === 'Tab') closePicker(picker);
+            });
+        });
+        document.addEventListener('click', event => {
+            languagePickers.forEach(picker => { if (!picker.contains(event.target)) closePicker(picker); });
+        });
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        function currentLanguage() { return activeLanguage; }
+        function updateMenuLabel() {
+            const open = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-label', translations[currentLanguage()][open ? 'menuClose' : 'menuOpen']);
+        }
+        function setMenu(open) {
+            mobileMenu.hidden = !open;
+            menuButton.setAttribute('aria-expanded', String(open));
+            updateMenuLabel();
+        }
+        menuButton.addEventListener('click', () => setMenu(mobileMenu.hidden));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', event => { if (event.key === 'Escape' && !mobileMenu.hidden) { setMenu(false); menuButton.focus(); } });
+        document.addEventListener('click', event => { if (!mobileMenu.hidden && !event.target.closest('header')) setMenu(false); });
+        window.matchMedia('(min-width: 768px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
+        // 把瀏覽器語言代碼（如 ja-JP、zh-HK、de-AT）對應到網站支援的語言；不支援則回傳 null
+        function matchLanguage(tag) {
+            if (!tag) return null;
+            const t = String(tag).toLowerCase();
+            if (t === 'zh' || t.startsWith('zh-')) {
+                // 中國大陸、新加坡、馬來西亞與 zh-Hans → 簡體；台灣、香港、澳門、zh-Hant 與單純 zh → 繁體
+                return /^zh-(hans|cn|sg|my)\b/.test(t) ? 'zh-CN' : 'zh-TW';
+            }
+            const base = t.split('-')[0];
+            return translations[base] ? base : null;
+        }
+        function detectBrowserLanguage() {
+            try {
+                const list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+                for (const tag of list) { const match = matchLanguage(tag); if (match) return match; }
+            } catch (_) {}
+            return DEFAULT_LANGUAGE;
+        }
+        // 優先順序：網址 ?lang=xx → 使用者手動選過的語言 → 瀏覽器語言 → 預設繁中
+        function initialLanguage() {
+            try { const fromUrl = matchLanguage(new URLSearchParams(location.search).get('lang')); if (fromUrl) return fromUrl; } catch (_) {}
+            try { const saved = localStorage.getItem(STORAGE_KEY); if (saved && translations[saved]) return saved; } catch (_) {}
+            return detectBrowserLanguage();
+        }
+        const loadedFonts = new Set();
+        function loadFont(language) {
+            const family = languageFonts[language];
+            if (!family || loadedFonts.has(family)) return;
+            loadedFonts.add(family);
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `https://fonts.googleapis.com/css2?family=${family}:wght@300;400;500;700&display=swap`;
+            document.head.appendChild(link);
+        }
+        function setLanguage(language, remember = false) {
+            const selected = translations[language] ? language : DEFAULT_LANGUAGE;
+            const t = translations[selected];
+            activeLanguage = selected;
+            document.documentElement.lang = selected;
+            document.documentElement.dir = RTL_LANGUAGES.includes(selected) ? 'rtl' : 'ltr';
+            loadFont(selected);
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.dataset.i18n;
-                if (translations[selected][key]) element.textContent = translations[selected][key];
+                const text = key in t ? t[key] : translations.en[key];
+                if (text !== undefined) element.textContent = text;
             });
-            document.querySelector('meta[name="description"]').content = translations[selected].metaDescription;
-            document.querySelector('meta[property="og:title"]').content = translations[selected].pageTitle;
-            document.querySelector('meta[property="og:description"]').content = translations[selected].metaDescription;
-            languageButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === selected)));
-            try { localStorage.setItem('site-language', selected); } catch (_) {}
+            const currentLabel = languages.find(item => item.code === selected).label;
+            languagePickers.forEach(picker => {
+                const label = picker.querySelector('[data-lang-current]');
+                label.textContent = currentLabel; label.lang = selected;
+                picker.querySelectorAll('.lang-option').forEach(item => item.setAttribute('aria-selected', String(item.dataset.value === selected)));
+            });
+            updateMenuLabel();
+            updateEmailLink();
+            if (remember) { try { localStorage.setItem(STORAGE_KEY, selected); } catch (_) {} }
         }
-        languageButtons.forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.language)));
-        let savedLanguage = 'zh';
-        try { savedLanguage = localStorage.getItem('site-language') || 'zh'; } catch (_) {}
-        setLanguage(savedLanguage);
 
+        const contactEmail = 'dream.huang.314@gmail.com';
+        function isMobileDevice() {
+            return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+        }
+        // 寄信按鈕是真正的連結（不用 window.open），瀏覽器不會當成彈出視窗擋掉
+        const sendEmailLink = document.getElementById('sendEmail');
+        function updateEmailLink() {
+            const t = translations[currentLanguage()];
+            const subject = encodeURIComponent(t.emailSubject);
+            const body = encodeURIComponent(t.emailBody);
+            if (isMobileDevice()) {
+                // 手機：開啟預設郵件 App（多數為 Gmail App）
+                sendEmailLink.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+                sendEmailLink.removeAttribute('target');
+                sendEmailLink.removeAttribute('rel');
+            } else {
+                // 桌面：在新分頁開啟 Gmail 撰寫頁面
+                sendEmailLink.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(contactEmail)}&su=${subject}&body=${body}`;
+                sendEmailLink.target = '_blank';
+                sendEmailLink.rel = 'noopener noreferrer';
+            }
+        }
+        sendEmailLink.addEventListener('click', () => {
+            // 萬一裝置沒有可用的郵件程式，至少讓訪客知道下一步
+            document.getElementById('copyStatus').textContent = translations[currentLanguage()].emailHint;
+        });
+
+        let copyResetTimer;
         document.getElementById('copyEmail').addEventListener('click', async () => {
-            const email = 'dream.huang.314@gmail.com';
+            const email = contactEmail;
             const status = document.getElementById('copyStatus');
-            const language = document.documentElement.lang === 'en' ? 'en' : 'zh';
+            const language = currentLanguage();
             try {
                 if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(email);
                 else {
@@ -182,8 +403,21 @@
                     const copied = document.execCommand('copy'); field.remove(); if (!copied) throw new Error('copy failed');
                 }
                 status.textContent = translations[language].copied;
+                // 按鈕本身變成「✓ 已複製」，2 秒後恢復
+                const button = document.getElementById('copyEmail');
+                const label = document.getElementById('copyLabel');
+                button.classList.add('is-copied');
+                label.textContent = translations[language].copiedShort;
+                clearTimeout(copyResetTimer);
+                copyResetTimer = setTimeout(() => {
+                    button.classList.remove('is-copied');
+                    label.textContent = translations[currentLanguage()].copyEmail;
+                }, 2000);
             } catch (_) { status.textContent = translations[language].copyFailed; }
         });
+
+        // 所有元件都準備好後，再套用初始語言
+        setLanguage(initialLanguage());
     </script>
 </body>
 </html>

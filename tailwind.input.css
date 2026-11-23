@@ -1,0 +1,85 @@
+/* 原始樣式檔。修改後執行：npx tailwindcss@3 -i tailwind.input.css -o styles.css --content index.html --minify */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --gold:#c6a05d; --ink:#3b4250; }
+html { scroll-behavior:smooth; scroll-padding-top:76px; }
+body { font-family:'Noto Sans TC',sans-serif; color:var(--ink); background:radial-gradient(circle at 50% 0,#fff 0,#f1f2f4 75%); }
+@layer components {
+  .card { background:rgba(255,255,255,.88); border:1px solid rgba(74,83,99,.15); border-radius:14px; box-shadow:0 8px 28px rgba(30,41,59,.06); }
+  .card-accent { border-top:3px solid var(--gold); }
+  .gold { color:#8a6a2f; }
+  .button { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:10px 22px; border:1px solid var(--ink); border-radius:999px; background:var(--ink); color:white; font-weight:700; transition:.2s; }
+  /* 一般按鈕：滑過時加深並微微浮起，不再變透明／白色 */
+  .button:hover { background:#2b303b; border-color:#2b303b; color:#fff; transform:translateY(-1px); box-shadow:0 6px 16px rgba(43,48,59,.2); }
+  .button:active { transform:scale(.97); }
+  .button-outline { background:transparent; color:var(--ink); }
+  .button-outline:hover { background:rgba(198,160,93,.1); border-color:var(--gold); color:var(--ink); box-shadow:0 6px 16px rgba(198,160,93,.18); }
+  .lang-picker { position:relative; }
+  .lang-trigger { display:inline-flex; align-items:center; gap:8px; min-height:40px; border:1px solid rgba(59,66,80,.2); border-radius:999px; padding:6px 14px; font-size:14px; font-weight:700; color:var(--ink); background:#fff; cursor:pointer; white-space:nowrap; }
+  .lang-trigger:hover { border-color:rgba(59,66,80,.4); }
+  .lang-chevron { width:14px; height:14px; transition:transform .2s; }
+  .lang-trigger[aria-expanded="true"] .lang-chevron { transform:rotate(180deg); }
+  /* 清單最多約顯示 6 項，其餘上下捲動 */
+  .lang-list { position:absolute; top:calc(100% + 6px); inset-inline-end:0; z-index:50; min-width:100%; width:max-content; max-height:min(264px, 60vh); overflow-y:auto; overscroll-behavior:contain; padding:6px; background:#fff; border:1px solid rgba(59,66,80,.15); border-radius:14px; box-shadow:0 12px 32px rgba(30,41,59,.14); }
+  .lang-option { display:flex; align-items:center; min-height:40px; padding:0 14px; border-radius:10px; font-size:14px; font-weight:500; cursor:pointer; white-space:nowrap; outline:none; }
+  .lang-option:hover, .lang-option:focus { background:rgba(198,160,93,.12); }
+  .lang-option:focus-visible { outline-offset:-2px; }
+  .lang-option[aria-selected="true"] { color:#8a6a2f; font-weight:700; }
+  .lang-option[aria-selected="true"]::after { content:"\2713"; margin-inline-start:auto; padding-inline-start:16px; }
+  /* 手機選單內：清單直接展開在下方，不浮動 */
+  .lang-picker--inline { display:contents; }
+  .lang-picker--inline .lang-list { position:static; flex-basis:100%; width:100%; max-height:200px; box-shadow:none; }
+  /* 手機選單本身也可捲動，避免橫向或矮螢幕時看不到下方項目 */
+  .mobile-menu { max-height:calc(100vh - 69px); max-height:calc(100dvh - 69px); overflow-y:auto; overscroll-behavior:contain; }
+  .section-title { letter-spacing:.04em; }
+  /* ===== 聯絡區三顆按鈕 ===== */
+  .contact-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+  .cta { position:relative; overflow:hidden; isolation:isolate; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:12px 26px; border:1px solid transparent; border-radius:999px; font-weight:700; line-height:1.2; cursor:pointer; -webkit-tap-highlight-color:transparent;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background-color .25s ease, border-color .25s ease, color .25s ease; }
+  .cta:hover { transform:translateY(-2px); }
+  .cta:active { transform:translateY(0) scale(.97); transition-duration:.08s; }
+  .cta-icon { position:relative; width:20px; height:20px; flex-shrink:0; transition:transform .35s cubic-bezier(.2,.8,.2,1); }
+  /* 寄信洽談：深墨藍漸層＋金色紙飛機，滑過時金色光暈與掃光 */
+  .cta-primary { color:#fff; background:linear-gradient(135deg,#4d5669 0%,#2b303b 100%); box-shadow:0 6px 18px rgba(43,48,59,.28), inset 0 1px 0 rgba(255,255,255,.14); }
+  .cta-primary .cta-icon { color:#e6c88d; }
+  .cta-primary:hover { box-shadow:0 12px 28px rgba(43,48,59,.32), 0 0 0 4px rgba(198,160,93,.25); }
+  .cta-primary:hover .cta-icon { transform:translate(3px,-3px) rotate(-6deg); }
+  .cta-primary::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%); transform:translateX(-130%); transition:transform .8s ease; pointer-events:none; }
+  .cta-primary:hover::after { transform:translateX(130%); }
+  /* 加 LINE 聊聊：加深的 LINE 綠，白字更清楚；滑過時對話泡泡晃動 */
+  .cta-line { color:#fff; background:linear-gradient(135deg,#08b552 0%,#047a35 100%); box-shadow:0 6px 18px rgba(4,122,53,.25), inset 0 1px 0 rgba(255,255,255,.18); }
+  .cta-line:hover { box-shadow:0 12px 28px rgba(4,122,53,.3), 0 0 0 4px rgba(6,199,85,.2); }
+  .cta-line:hover .cta-icon { animation:cta-wiggle .6s ease; }
+  /* 複製 Email：白底細框，滑過變金框；複製成功變綠色勾勾 */
+  .cta-ghost { color:var(--ink); background:#fff; border-color:rgba(59,66,80,.22); box-shadow:0 2px 8px rgba(30,41,59,.06); }
+  .cta-ghost:hover { border-color:var(--gold); background:#fffaf1; box-shadow:0 10px 22px rgba(198,160,93,.22); }
+  .cta-icon-swap svg { position:absolute; inset:0; width:100%; height:100%; transition:opacity .2s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
+  .cta-icon-swap .icon-check { opacity:0; transform:scale(.3) rotate(-45deg); }
+  .cta-ghost.is-copied { color:#047a35; border-color:#34c56b; background:#eefbf2; box-shadow:0 0 0 4px rgba(52,197,107,.18); }
+  .cta-ghost.is-copied .icon-copy { opacity:0; transform:scale(.3); }
+  .cta-ghost.is-copied .icon-check { opacity:1; transform:none; }
+  .cta-ghost.is-copied #copyLabel { animation:cta-pop .35s ease; }
+  .menu-button { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid rgba(59,66,80,.2); border-radius:999px; color:var(--ink); }
+  .menu-button .menu-icon-close, .menu-button[aria-expanded="true"] .menu-icon-open { display:none; }
+  .menu-button[aria-expanded="true"] .menu-icon-close { display:block; }
+  .mobile-link { display:flex; align-items:center; min-height:48px; padding:0 8px; border-bottom:1px solid rgba(59,66,80,.08); font-weight:500; }
+  .mobile-link:last-of-type { border-bottom:0; }
+  .mobile-link:hover, .mobile-link:active { color:#8a6a2f; background:rgba(198,160,93,.08); }
+}
+/* 各語言字型（對應字型由 index.html 的 script 依語言動態載入） */
+html:lang(ja) body { font-family:'Noto Sans JP',sans-serif; }
+html:lang(zh-CN) body { font-family:'Noto Sans SC',sans-serif; }
+html:lang(ko) body { font-family:'Noto Sans KR',sans-serif; }
+html:lang(ar) body { font-family:'Noto Sans Arabic',sans-serif; }
+/* 阿拉伯文由右至左排版 */
+@media (min-width:768px) { [dir="rtl"] .md\:text-left { text-align:right; } }
+@keyframes cta-wiggle { 0%,100% { transform:rotate(0); } 25% { transform:rotate(-14deg) scale(1.1); } 50% { transform:rotate(10deg) scale(1.1); } 75% { transform:rotate(-5deg); } }
+@keyframes cta-pop { 0% { transform:scale(.85); opacity:.4; } 60% { transform:scale(1.06); } 100% { transform:scale(1); opacity:1; } }
+/* 手機：三顆按鈕改成上下排列、滿寬，好按 */
+@media (max-width:639px) { .contact-actions { flex-direction:column; align-items:stretch; max-width:340px; margin-inline:auto; } }
+/* 減少動態效果偏好：取消浮起與掃光 */
+@media (prefers-reduced-motion:reduce) { .cta:hover, .cta:active, .button:hover, .button:active { transform:none; } .cta-primary::after { display:none; } }
+:focus-visible { outline:3px solid #c6a05d; outline-offset:3px; }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition-duration:.01ms !important; animation-duration:.01ms !important; } }
