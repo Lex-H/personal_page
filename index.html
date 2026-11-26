@@ -33,11 +33,17 @@
                 <a href="#contact" data-i18n="navContact" class="hover:text-amber-800">聯絡</a>
             </nav>
             <div class="hidden shrink-0 items-center gap-2 md:flex">
-                <div id="themeSwitcher" class="theme-switcher" hidden>
-                  <button type="button" class="theme-dot theme-dot--anime" data-theme="anime" aria-label="動漫風格" title="動漫風"></button>
-                  <button type="button" class="theme-dot theme-dot--business" data-theme="business" aria-label="商務風格" title="商務風"></button>
-                  <button type="button" class="theme-dot theme-dot--local" data-theme="local" aria-label="親切風格" title="在地風"></button>
-                  <button type="button" class="theme-dot theme-dot--game" data-theme="game" aria-label="遊戲風格" title="遊戲風"></button>
+                <div id="themeSwitcher" class="theme-picker" hidden>
+                  <button type="button" class="theme-picker-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="切換主題">
+                    <svg class="theme-picker-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 .83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z"/><circle cx="6.5"  cy="11.5" r="1.25" fill="currentColor" stroke="none"/><circle cx="9.5"  cy="7.5"  r="1.25" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.5"  r="1.25" fill="currentColor" stroke="none"/><circle cx="17.5" cy="11.5" r="1.25" fill="currentColor" stroke="none"/></svg>
+                    <svg class="theme-picker-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                  </button>
+                  <ul class="theme-picker-list" role="listbox" hidden>
+                    <li><button type="button" class="theme-picker-option" data-theme="anime"    role="option">動漫金星</button></li>
+                    <li><button type="button" class="theme-picker-option" data-theme="business" role="option">商務科技</button></li>
+                    <li><button type="button" class="theme-picker-option" data-theme="local"    role="option">親切在地</button></li>
+                    <li><button type="button" class="theme-picker-option" data-theme="game"     role="option">電玩遊戲</button></li>
+                  </ul>
                 </div>
                 <button id="modeSwitchBtn" type="button" class="mode-switch-btn" hidden>
                   <svg class="mode-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -59,11 +65,17 @@
                 <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
                     <div class="flex items-center gap-2">
                       <span class="text-sm font-medium text-slate-500" data-i18n="languageLabel">語言</span>
-                      <div id="themeSwitcherMobile" class="theme-switcher" hidden>
-                        <button type="button" class="theme-dot theme-dot--anime" data-theme="anime" aria-label="動漫風格" title="動漫風"></button>
-                        <button type="button" class="theme-dot theme-dot--business" data-theme="business" aria-label="商務風格" title="商務風"></button>
-                        <button type="button" class="theme-dot theme-dot--local" data-theme="local" aria-label="親切風格" title="在地風"></button>
-                        <button type="button" class="theme-dot theme-dot--game" data-theme="game" aria-label="遊戲風格" title="遊戲風"></button>
+                      <div id="themeSwitcherMobile" class="theme-picker" hidden>
+                        <button type="button" class="theme-picker-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="切換主題">
+                          <svg class="theme-picker-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 .83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z"/><circle cx="6.5"  cy="11.5" r="1.25" fill="currentColor" stroke="none"/><circle cx="9.5"  cy="7.5"  r="1.25" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.5"  r="1.25" fill="currentColor" stroke="none"/><circle cx="17.5" cy="11.5" r="1.25" fill="currentColor" stroke="none"/></svg>
+                          <svg class="theme-picker-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                        <ul class="theme-picker-list" role="listbox" hidden>
+                          <li><button type="button" class="theme-picker-option" data-theme="anime"    role="option">動漫金星</button></li>
+                          <li><button type="button" class="theme-picker-option" data-theme="business" role="option">商務科技</button></li>
+                          <li><button type="button" class="theme-picker-option" data-theme="local"    role="option">親切在地</button></li>
+                          <li><button type="button" class="theme-picker-option" data-theme="game"     role="option">電玩遊戲</button></li>
+                        </ul>
                       </div>
                       <button id="modeSwitchBtnMobile" type="button" class="mode-switch-btn" hidden>
                         <svg class="mode-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -386,15 +398,16 @@
         }
 
         const VISITOR_THEME_KEY = 'site-visitor-theme';
+        const THEME_LABELS = { anime:'動漫金星', business:'商務科技', local:'親切在地', game:'電玩遊戲' };
         function applyTheme(theme) {
             if (!['anime','business','local','game'].includes(theme)) return;
             document.body.setAttribute('data-theme', theme);
             try { localStorage.setItem(VISITOR_THEME_KEY, theme); } catch (_) {}
-            document.querySelectorAll('.theme-switcher').forEach(el => { el.hidden = false; });
+            document.querySelectorAll('.theme-picker').forEach(el => { el.hidden = false; });
         }
         function clearTheme() {
             document.body.removeAttribute('data-theme');
-            document.querySelectorAll('.theme-switcher').forEach(el => { el.hidden = true; });
+            document.querySelectorAll('.theme-picker').forEach(el => { el.hidden = true; });
             try { localStorage.removeItem(VISITOR_THEME_KEY); } catch (_) {}
         }
 
@@ -653,9 +666,29 @@
             document.getElementById('welcomeBack3')?.addEventListener('click', () => {
                 step3.setAttribute('hidden', ''); step2.removeAttribute('hidden');
             });
-            // 主題切換器色點
-            document.querySelectorAll('.theme-dot').forEach(dot => {
-                dot.addEventListener('click', () => applyTheme(dot.dataset.theme));
+            // 主題選擇器：開／關下拉
+            document.querySelectorAll('.theme-picker-btn').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const list = btn.nextElementSibling;
+                    const willOpen = list.hidden;
+                    document.querySelectorAll('.theme-picker-list').forEach(l => { l.hidden = true; });
+                    document.querySelectorAll('.theme-picker-btn').forEach(b => b.setAttribute('aria-expanded','false'));
+                    if (willOpen) { list.hidden = false; btn.setAttribute('aria-expanded','true'); }
+                });
+            });
+            // 主題選擇器：選項點擊
+            document.querySelectorAll('.theme-picker-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    applyTheme(opt.dataset.theme);
+                    document.querySelectorAll('.theme-picker-list').forEach(l => { l.hidden = true; });
+                    document.querySelectorAll('.theme-picker-btn').forEach(b => b.setAttribute('aria-expanded','false'));
+                });
+            });
+            // 點外部關閉
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.theme-picker-list').forEach(l => { l.hidden = true; });
+                document.querySelectorAll('.theme-picker-btn').forEach(b => b.setAttribute('aria-expanded','false'));
             });
             // 點backdrop或Escape關閉
             document.getElementById('welcomeBackdrop')?.addEventListener('click', closeModal);
